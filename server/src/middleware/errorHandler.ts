@@ -4,6 +4,7 @@ import { BaseError, NotFoundError, ValidationError } from "../Errors/errors.js";
 // error handler middleware
 export const errorHandler: any = (err: Error, req: Request, res: Response, next: NextFunction) => {
     console.log("error:", err)
+    console.log('=======================>')
     if (err instanceof ValidationError) {
         return res.status(err.statusCode).json({
             status: false,
@@ -11,6 +12,8 @@ export const errorHandler: any = (err: Error, req: Request, res: Response, next:
             message: err.message,
             data: err.errorData
         })
+
+        
     } if (err instanceof NotFoundError) {
         return res.status(err.statusCode).json({
             status: false,
