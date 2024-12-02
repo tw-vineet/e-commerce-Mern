@@ -1,37 +1,63 @@
 import { Request, Response, NextFunction } from "express";
-import { ValidationError } from "../Errors/errors.js";
+import User, { createUser, getUserDetailsByEmail } from "../models/Users.js";
+import { getDecryptedPassword, getEncryptedPassword } from "../helper/services/crypto.js";
+import { string } from "joi";
+import { NotFoundError, UnAuthorizedError } from "../middleware/errorHandler.js";
+import { generateJwtToken } from "../helper/services/jwtToken.js";
+import { jwtCredential } from "../DataTypes/dataTypes.js";
 
 const signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { firstName, lastName } = req.body;
-        // const errors = [];
+        const { password } = req.body;
+        const encryptedPassword = await getEncryptedPassword(password, next);
+        const values = {
+            ...req.body,
+            password: encryptedPassword,
+        };
 
-        // if (!firstName) errors.push({ firstName: "Firsat ame is required" })
-        // if (!lastName) errors.push({ lastName: "Last name is required" })
-
-        // const errors: any = {};
-        // if (!firstName) {
-        //     errors["firstName"] = "First name is required"
-        // }
-        // if (!lastName) {
-        //     errors["lastName"] = "Last name is required"
-        // }
-
-        // if (errors) return next(new ValidationError(errors))
-
+        await createUser(values, next);
         res.status(201).json({
             status: true,
             statusCode: 200,
-            message: "Signup successfully",
-            // data: err.errorData
-        })
-
+            message: "User registered successfully",
+        });
     } catch (error) {
-        // console.log(error);
         next(error)
     }
 };
 
+const login = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email, password } = req.body;
+        const userDetails = await getUserDetailsByEmail(email, next);
+        if (!userDetails) {
+            return next(new NotFoundError("User with provided email not found"))
+        };
+
+        const decriptedPassword = await getDecryptedPassword(userDetails.password, next);
+        if (decriptedPassword !== password) {
+            return next(new UnAuthorizedError("Incorrect password"))
+        };
+
+        const credential: jwtCredential = {
+            userId: userDetails._id,
+            isAdmin: false
+        };
+        const accessToken = await generateJwtToken(credential, next);
+
+        res.status(201).json({
+            status: true,
+            statusCode: 200,
+            message: "You have been loggedin successfully",
+            data: { accessToken }
+        });
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const authController = {
-    signup
+    signup,
+    login
 }
