@@ -1,0 +1,13 @@
+.firstbox-signup::after {
+    width: 597px;
+    content: " ";
+    background-image: url(../../image/7365692.jpg);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 388px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
