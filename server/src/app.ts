@@ -22,7 +22,7 @@ app.use(fileUpload({
 //routes
 app.use("/api", Routes)
 app.use("*", (req, res, next) => {
-    next(new NotFoundError("Innvalid requested url"))
+    next(new NotFoundError("Invalid requested url"))
 });
 
 //Error handler middleware

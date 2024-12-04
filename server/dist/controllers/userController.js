@@ -9,11 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const userDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const headers = req.headers.authorization;
-        console.log("headers", headers);
-        res.send(headers);
-        // const userDetails = await getUserDetails(userId, next)
-        // res.send(userDetails)
     }
     catch (error) {
         console.log("errorrrr", error);
