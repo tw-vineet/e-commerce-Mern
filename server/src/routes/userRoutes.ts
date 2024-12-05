@@ -10,6 +10,7 @@ const { userController } = controllers;
 //Routes
 Router.post("/user-details", verifyToken, userController.userDetails);
 Router.post("/update-user-details", verifyToken, updateUserValidation, userController.updateUserDetails);
+Router.get("/delete-user", userController.deleteUser);
 
 const userRouter = Router;
 export { userRouter };

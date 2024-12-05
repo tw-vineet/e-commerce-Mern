@@ -150,10 +150,12 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
 
             profileImage: joi.alternatives().try(
                 joi.any().required().label('Profile image').custom((value, helpers) => {
+                    console.log("value", value);
+
                     if (!value) {
                         return helpers.error('any.required', { message: "Profile image is required" });
                     } else if (typeof value !== 'string') {
-                        if (Array.isArray(value.profileImage)) {
+                        if (Array.isArray(value)) {
                             return helpers.error('any.invalid', { message: "Only 1 image file is allowed" });
                         } else if (!validImageFormats.includes(value.profileImage?.mimetype)) {
                             return helpers.error('any.invalid', { message: "Invalid image formate: Only jpg,jpeg and png formate allowed." });

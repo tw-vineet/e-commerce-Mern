@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
-
+import cors from 'cors';
 import connectDB from './config/db/database.js';
 import { authRouter } from './routes/authRouter.js';
 import bodyParser from 'body-parser';
@@ -13,6 +13,10 @@ import { NotFoundError } from './middleware/errorHandler.js';
 dotenv.config();
 const app = express();
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}));
 app.use(bodyParser.json());
 app.use(fileUpload({
     useTempFiles: true, // Ensure this is enabled to use tempFilePath

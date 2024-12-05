@@ -47,7 +47,17 @@ const updateUserDetails = async (req: Request, res: Response, next: NextFunction
     }
 };
 
+const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        console.log("called deleteUser");
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const userController = {
     userDetails,
-    updateUserDetails
+    updateUserDetails,
+    deleteUser
 }
