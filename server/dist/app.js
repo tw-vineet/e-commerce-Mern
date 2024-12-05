@@ -2,10 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
 import connectDB from './config/db/database.js';
-import { authRouter } from './routes/authRouter.js';
 import bodyParser from 'body-parser';
-import { errorHandler } from './middleware/errorHandler.js';
-import { NotFoundError } from './Errors/errors.js';
+import { Routes } from './routes/index.js';
+import { errorHandler } from './middleware/index.js';
+import { NotFoundError } from './middleware/errorHandler.js';
 dotenv.config();
 const app = express();
 app.use(bodyParser.json());
@@ -14,9 +14,9 @@ app.use(fileUpload({
     tempFileDir: '/tmp/' // Directory for storing temporary files
 }));
 //routes
-app.use("/api/auth", authRouter);
+app.use("/api", Routes);
 app.use("*", (req, res, next) => {
-    next(new NotFoundError("Innvalid requested url"));
+    next(new NotFoundError("Invalid requested url"));
 });
 //Error handler middleware
 app.use(errorHandler);

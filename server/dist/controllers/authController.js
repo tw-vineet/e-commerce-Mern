@@ -7,32 +7,56 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { createUser, getUserDetailsByEmail } from "../models/Users.js";
+import { getDecryptedPassword, getEncryptedPassword } from "../helper/services/crypto.js";
+import { NotFoundError, UnAuthorizedError } from "../middleware/errorHandler.js";
+import { generateJwtToken } from "../helper/services/jwtToken.js";
 const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { firstName, lastName } = req.body;
-        // const errors = [];
-        // if (!firstName) errors.push({ firstName: "Firsat ame is required" })
-        // if (!lastName) errors.push({ lastName: "Last name is required" })
-        // const errors: any = {};
-        // if (!firstName) {
-        //     errors["firstName"] = "First name is required"
-        // }
-        // if (!lastName) {
-        //     errors["lastName"] = "Last name is required"
-        // }
-        // if (errors) return next(new ValidationError(errors))
+        const { password } = req.body;
+        const encryptedPassword = yield getEncryptedPassword(password, next);
+        const values = Object.assign(Object.assign({}, req.body), { password: encryptedPassword });
+        yield createUser(values, next);
         res.status(201).json({
             status: true,
             statusCode: 200,
-            message: "Signup successfully",
-            // data: err.errorData
+            message: "User registered successfully",
         });
     }
     catch (error) {
-        // console.log(error);
+        next(error);
+    }
+});
+const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        const userDetails = yield getUserDetailsByEmail(email, next);
+        if (!userDetails) {
+            return next(new NotFoundError("User with provided email not found"));
+        }
+        ;
+        const decriptedPassword = yield getDecryptedPassword(userDetails.password, next);
+        if (decriptedPassword !== password) {
+            return next(new UnAuthorizedError("Incorrect password"));
+        }
+        ;
+        const credential = {
+            userId: userDetails._id,
+            isAdmin: false
+        };
+        const accessToken = yield generateJwtToken(credential, next);
+        res.status(201).json({
+            status: true,
+            statusCode: 200,
+            message: "You have been loggedin successfully",
+            data: { accessToken }
+        });
+    }
+    catch (error) {
         next(error);
     }
 });
 export const authController = {
-    signup
+    signup,
+    login
 };
