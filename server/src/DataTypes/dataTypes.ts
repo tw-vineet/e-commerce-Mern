@@ -15,11 +15,33 @@ declare global {
 
 export interface fileWithTempPath {
     tempFilePath: string,
-    [key: string]: any
 }
 
 export interface UploadedImage {
     public_id: string;
     secure_url: string;
-    [key: string]: any;
 }
+
+export type arrayObject = {
+    [key: string]: string
+}
+
+type signupObject = {
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneCode: number
+    mobileNumber: number
+    password: string,
+}
+
+type updateUserObject = {
+    firstName: string,
+    lastName: string,
+    phoneCode: number
+    mobileNumber: number
+    password: string,
+    profileImage: UploadedImage
+}
+
+export type dynamicObject = signupObject | updateUserObject

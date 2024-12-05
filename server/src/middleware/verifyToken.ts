@@ -7,6 +7,7 @@ import { jwtCredential } from "../DataTypes/dataTypes.js";
 dotenv.config();
 export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const { userId } = req.body;
         const headers = req.headers.authorization;
         if (!headers) {
             return next(new NotFoundError("Access token required"))
@@ -33,7 +34,6 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
                 }
             };
 
-            // const user = data as jwtCredential;
             req.user = data as jwtCredential;
             next();
         })

@@ -7,7 +7,6 @@ export const checkValidImage = async (url: string) => {
         const type = imageType(response.data);
         return true;
     } catch (error) {
-        console.log(error);
         return false;
     }
 };

@@ -9,6 +9,7 @@ import { Routes } from './routes/index.js';
 
 import { errorHandler } from './middleware/index.js';
 import { NotFoundError } from './middleware/errorHandler.js';
+import { logger } from './helper/services/logger.js';
 
 dotenv.config();
 const app = express();
@@ -34,5 +35,5 @@ app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
     connectDB();
-    console.log(`Server is running at: http://localhost:${process.env.PORT}`);
+    logger.info(`Server is running at: http://localhost:${process.env.PORT}`)
 });

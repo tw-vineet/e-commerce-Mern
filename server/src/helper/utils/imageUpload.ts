@@ -15,7 +15,7 @@ export const uploadImageToCloudinary = async (files: fileWithTempPath | fileWith
         const uploadedImages: UploadedImage[] = []
         const uploadFile = async (file: fileWithTempPath) => {
             const tempFilePath = file.tempFilePath
-            const result = cloudinary.uploader.upload(tempFilePath, { folder });
+            const result = await cloudinary.uploader.upload(tempFilePath, { folder });
             return result;
         };
 
