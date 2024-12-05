@@ -1,5 +1,6 @@
 import { NextFunction } from "express";
 import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -32,6 +33,10 @@ const userSchema = new mongoose.Schema({
         enum: ['user', "admin"],
         default: "user"
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     profileImage: {
         type: String,
         default: ""
@@ -42,25 +47,22 @@ const User = mongoose.model("user", userSchema);
 export default User;
 
 //services
-
-export const createUser = async (values: Record<string, string>, next: NextFunction) => {
+export const createUser = async (data: Record<string, string>, next: NextFunction) => {
     try {
-        const newUser = new User(values)
+        const newUser = new User(data)
         const response = await newUser.save();
         return response;
     } catch (error) {
         next(error);
-        console.log("error", error);
     }
 }
 
-export const getUserDetails = async (id: string, next: NextFunction) => {
+export const getUserDetails = async (id: ObjectId, next: NextFunction) => {
     try {
         const response = await User.findById(id).select("-password");
         return response;
     } catch (error) {
         next(error);
-        console.log("error", error);
     }
 }
 export const getUserDetailsByEmail = async (email: string, next: NextFunction) => {
@@ -69,6 +71,14 @@ export const getUserDetailsByEmail = async (email: string, next: NextFunction) =
         return response;
     } catch (error) {
         next(error);
-        console.log("error", error);
+    }
+}
+
+export const updateUser = async (userId: ObjectId, data: Record<string, string>, next: NextFunction) => {
+    try {
+        const response = await User.findByIdAndUpdate(userId, { $set: data }, { new: true }).select("-password");
+        return response;
+    } catch (error) {
+        next(error);
     }
 }
