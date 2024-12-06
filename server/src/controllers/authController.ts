@@ -41,7 +41,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
         const credential: jwtCredential = {
             userId: userDetails._id,
-            isAdmin: false
+            isAdmin: true
         };
         const accessToken = await generateJwtToken(credential, next);
 

@@ -5,8 +5,9 @@ import { UnAuthorizedError } from "./errorHandler.js";
 export const checkAdmin = async (req: Request, res: Response, next: NextFunction) => {
     try {
         verifyToken(req, res, () => {
-            const { isAdmin, userId } = req.user
-            console.log("req.usersss", req.user);
+            const { isAdmin, userId } = req.user;
+            console.log("req.user", req.user);
+
             if (isAdmin) {
                 next()
             } else {
