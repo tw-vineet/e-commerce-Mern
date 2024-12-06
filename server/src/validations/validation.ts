@@ -1,34 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import joi from 'joi';
 import { ValidationError } from '../middleware/errorHandler.js';
-import { UploadedImage } from '../DataTypes/dataTypes.js';
+import { arrayObject, dynamicObject, UploadedImage } from '../DataTypes/dataTypes.js';
 import { checkValidImage } from '../helper/utils/validImage.js';
-import { error } from 'console';
-
-type arrayObject = {
-    [key: string]: string
-}
-
-type signupObject = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneCose: number
-    mobileNumber: number
-    password: string,
-}
-
-type updateUserObject = {
-    firstName: string,
-    lastName: string,
-    phoneCose: number
-    mobileNumber: number
-    password: string,
-    profileImage: UploadedImage
-}
 
 const validImageFormats = ['image/jpeg', 'image/png', 'image/jpg'];
-export const validateFormData = (validatingData: any, validationSchema: joi.ObjectSchema) => {
+export const validateFormData = (validatingData: dynamicObject, validationSchema: joi.ObjectSchema) => {
     const { error } = validationSchema.validate(validatingData);
     if (error) {
         const allErrors: arrayObject = {};
@@ -43,6 +20,8 @@ export const validateFormData = (validatingData: any, validationSchema: joi.Obje
 }
 
 export const signupValidation = async (req: Request, res: Response, next: NextFunction) => {
+    console.log("called");
+
     try {
         const validationSchema: joi.ObjectSchema = joi.object({
             firstName: joi.string().required().label("First name"),
@@ -83,7 +62,7 @@ export const signupValidation = async (req: Request, res: Response, next: NextFu
 
 
 
-        const validatingData: signupObject = {
+        const validatingData: dynamicObject = {
             ...req.body,
             // profileImage: req.files
         };
@@ -94,7 +73,7 @@ export const signupValidation = async (req: Request, res: Response, next: NextFu
         }
         next();
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 }
 
@@ -107,14 +86,14 @@ export const loginValidation = async (req: Request, res: Response, next: NextFun
             'string.empty': `{{#label}} is required`,
         });
 
-        const validatingData: signupObject = req.body
+        const validatingData: dynamicObject = req.body
         const errors = validateFormData(validatingData, validationSchema);
         if (errors) {
             return next(new ValidationError(errors))
         }
         next();
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 }
 
@@ -153,9 +132,9 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
                     if (!value) {
                         return helpers.error('any.required', { message: "Profile image is required" });
                     } else if (typeof value !== 'string') {
-                        if (Array.isArray(value.profileImage)) {
+                        if (Array.isArray(value)) {
                             return helpers.error('any.invalid', { message: "Only 1 image file is allowed" });
-                        } else if (!validImageFormats.includes(value.profileImage?.mimetype)) {
+                        } else if (!validImageFormats.includes(value.mimetype)) {
                             return helpers.error('any.invalid', { message: "Invalid image formate: Only jpg,jpeg and png formate allowed." });
                         }
                         return value;
@@ -180,13 +159,12 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
             'string.empty': `{{#label}} is required`,
         });
 
-        const validatingData: signupObject = {
+        const validatingData: dynamicObject = {
             ...req.body,
             profileImage: req.files?.profileImage
         };
 
         const errors = validateFormData(validatingData, validationSchema);
-        console.log("errors", errors);
 
         if (errors) {
             return next(new ValidationError(errors))

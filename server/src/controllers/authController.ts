@@ -45,7 +45,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         };
         const accessToken = await generateJwtToken(credential, next);
 
-        res.status(201).json({
+        res.status(200).json({
             status: true,
             statusCode: 200,
             message: "You have been loggedin successfully",

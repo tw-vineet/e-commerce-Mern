@@ -18,4 +18,4 @@ export const generateJwtToken = async (credential: jwtCredential, next: NextFunc
     } catch (error) {
         next(error)
     }
-}
+};

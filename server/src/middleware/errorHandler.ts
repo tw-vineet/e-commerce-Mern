@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { logger } from "../helper/services/logger.js";
 
 // base error class
 export class BaseError extends Error {
@@ -40,7 +41,7 @@ export class ValidationError extends BaseError {           // missing user input
 
 // error handler middleware
 export const errorHandler: any = (err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.log("error::", err)
+    logger.error("error::", err)
     if (err instanceof ValidationError) {
         return res.status(err.statusCode).json({
             status: false,
