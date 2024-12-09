@@ -33,7 +33,6 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
                     return next(new UnAuthorizedError("Something wrong with token."))
                 }
             };
-
             req.user = data as jwtCredential;
             next();
         })

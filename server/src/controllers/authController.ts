@@ -40,9 +40,10 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         };
 
         const credential: jwtCredential = {
-            userId: userDetails._id,
-            isAdmin: true
+            id: userDetails._id,
+            isAdmin: userDetails.isAdmin || false
         };
+
         const accessToken = await generateJwtToken(credential, next);
 
         res.status(200).json({

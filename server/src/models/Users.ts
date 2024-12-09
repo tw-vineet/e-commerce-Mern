@@ -9,20 +9,17 @@ const userSchema = new mongoose.Schema({
     },
     lastName: {
         type: String,
-        required: true
     },
     email: {
         type: String,
         required: true,
-        // unique: true
+        unique: true
     },
     phoneCode: {
         type: Number,
-        required: true,
     },
     mobileNumber: {
         type: Number,
-        required: true,
     },
     password: {
         type: String,
@@ -40,7 +37,11 @@ const userSchema = new mongoose.Schema({
     profileImage: {
         type: String,
         default: ""
-    }
+    },
+    address: {
+        type: String,
+    },
+
 }, { timestamps: true });
 
 const User = mongoose.model("user", userSchema);
@@ -59,12 +60,13 @@ export const createUser = async (data: Record<string, string>, next: NextFunctio
 
 export const getUserDetails = async (id: ObjectId, next: NextFunction) => {
     try {
-        const response = await User.findById(id).select("-password");
+        const response = await User.findById(id);
         return response;
     } catch (error) {
         next(error);
     }
 }
+
 export const getUserDetailsByEmail = async (email: string, next: NextFunction) => {
     try {
         const response = await User.findOne({ email });
