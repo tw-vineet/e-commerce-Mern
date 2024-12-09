@@ -164,3 +164,23 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
         next(error)
     }
 }
+
+export const categoryValidation = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const validationSchema: joi.ObjectSchema = joi.object({
+            categoryName: joi.string().required().label("Category name"),
+            categoryCode: joi.string().required().label("Category code"),
+        }).options({ abortEarly: false, allowUnknown: true }).messages({
+            'string.empty': `{{#label}} is required`,
+        });
+
+        const validatingData: dynamicObject = req.body
+        const errors = validateFormData(validatingData, validationSchema);
+        if (errors) {
+            return next(new ValidationError(errors))
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
