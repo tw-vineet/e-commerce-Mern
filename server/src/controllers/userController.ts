@@ -6,24 +6,24 @@ import { NotFoundError } from "../middleware/errorHandler.js";
 import mongoose from "mongoose";
 import { string } from "joi";
 import { getDecryptedPassword, getEncryptedPassword } from "../helper/services/crypto.js";
+import { messages } from "../helper/utils/messages.js";
 
+const { USER_DETAILS, USER_NOT_FOUND, INCORRECT_PASSWORD, USER_DETAIL_UPDATED, USER_DELETED } = messages;
 const userDetails = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.user;
 
         const userDetails = await getUserDetails(id, next);
         if (!userDetails) {
-            return next(new NotFoundError("User not found"))
+            return next(new NotFoundError(USER_NOT_FOUND))
         }
 
-        const { password, ...safeUserDetails } = userDetails.toObject(); // user details without password
-        console.log("safeUserDetails", safeUserDetails);
-
+        const { password, ...userData } = userDetails.toObject(); // user details without password
         res.status(200).json({
             status: true,
             statusCode: 200,
-            data: safeUserDetails,
-            message: "User details",
+            data: userData,
+            message: USER_DETAILS,
         });
     } catch (error) {
         next(error)
@@ -42,13 +42,13 @@ const updateUserDetails = async (req: Request, res: Response, next: NextFunction
 
         const userDetails = await getUserDetails(userId, next);
         if (!userDetails) {
-            return next(new NotFoundError("User not found"))
+            return next(new NotFoundError(USER_NOT_FOUND))
         }
 
-        if (isPasswordChange == "true") {
+        if (isPasswordChange) {
             const decriptedPassword = await getDecryptedPassword(userDetails.password, next);
             if (decriptedPassword !== currentPassword) {
-                return next(new NotFoundError("Incorrect password"))
+                return next(new NotFoundError(INCORRECT_PASSWORD))
             };
             const encryptedPassword = await getEncryptedPassword(newPassword, next);
             updatingData.password = encryptedPassword;
@@ -65,7 +65,7 @@ const updateUserDetails = async (req: Request, res: Response, next: NextFunction
             status: true,
             statusCode: 200,
             data: updatedUser,
-            message: "User details updated successfully",
+            message: USER_DETAIL_UPDATED,
         });
     } catch (error) {
         next(error)
@@ -81,7 +81,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
         res.status(200).json({
             status: true,
             statusCode: 200,
-            message: "User deleted successfully",
+            message: USER_DELETED,
         });
 
     } catch (error) {
@@ -97,7 +97,7 @@ const userList = async (req: Request, res: Response, next: NextFunction) => {
             status: true,
             statusCode: 200,
             data: allUserList,
-            message: "User details",
+            message: USER_DETAILS,
         });
     } catch (error) {
         next(error)

@@ -10,7 +10,9 @@ import { Routes } from './routes/index.js';
 import { errorHandler } from './middleware/index.js';
 import { NotFoundError } from './middleware/errorHandler.js';
 import { logger } from './helper/services/logger.js';
+import { messages } from './helper/utils/messages.js';
 
+const { INVALID_REQUESTED_URL, SERVER_RUNNING_AT } = messages;
 dotenv.config();
 const app = express();
 
@@ -27,7 +29,7 @@ app.use(fileUpload({
 //routes
 app.use("/api", Routes)
 app.use("*", (req, res, next) => {
-    next(new NotFoundError("Invalid requested url"))
+    next(new NotFoundError(INVALID_REQUESTED_URL))
 });
 
 //Error handler middleware
@@ -35,5 +37,6 @@ app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
     connectDB();
-    logger.info(`Server is running at: http://localhost:${process.env.PORT}`)
+    logger.info(`${SERVER_RUNNING_AT}: http://localhost:${process.env.PORT}`)
 });
+
