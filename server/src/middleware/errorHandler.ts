@@ -43,7 +43,7 @@ export class ValidationError extends BaseError {           // missing user input
 
 // error handler middleware
 export const errorHandler: any = (err: Error, req: Request, res: Response, next: NextFunction) => {
-    logger.error("error::", err)
+    // logger.error("error::", err)
     if (err instanceof ValidationError) {
         return res.status(err.statusCode).json({
             status: false,

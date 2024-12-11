@@ -41,6 +41,14 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    isDeActivated: {
+        type: Boolean,
+        default: false
+    },
 
 }, { timestamps: true });
 
