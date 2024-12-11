@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export type jwtCredential = {
-    userId: ObjectId,
+    id: ObjectId,
     isAdmin: boolean
 }
 
@@ -41,6 +41,8 @@ type updateUserObject = {
     phoneCode: number
     mobileNumber: number
     password: string,
+    newPassword: string,
+    confirmPassword: string,
     profileImage: UploadedImage
 }
 

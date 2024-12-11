@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { logger } from "../helper/services/logger.js";
+import { messages } from "../helper/utils/messages.js";
 
+const { VALIDATION_ERROR, SOMETHING_WENT_WRONG } = messages;
 // base error class
 export class BaseError extends Error {
     status: boolean;
@@ -33,7 +35,7 @@ export class UnAuthorizedError extends BaseError {
 export class ValidationError extends BaseError {           // missing user input
     errorData: Record<string, string>
     constructor(data: Record<string, string>) {
-        super("Validation Error", false, 400);
+        super(VALIDATION_ERROR, false, 400);
         this.errorData = data;
         Object.setPrototypeOf(this, ValidationError.prototype)
     }
@@ -80,7 +82,7 @@ export const errorHandler: any = (err: Error, req: Request, res: Response, next:
         return res.status(500).json({
             status: false,
             statusCode: 500,
-            message: "Something went wrong",
+            message: SOMETHING_WENT_WRONG,
             error: err.stack
         })
     }
