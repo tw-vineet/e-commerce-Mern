@@ -25,6 +25,12 @@ type cardProp = {
   icon: React.ReactNode;
 };
 
+type tableProp = {
+  name : string,
+  price : number,
+  unitsold : number
+}
+
 export const Dashboard = () => {
   const card = [
     {
@@ -267,10 +273,37 @@ const ChartSection = () => {
 };
 
 const TableSection = () =>{
+ 
+  const row = ["Name" , "Date","Amount" , "Status"]
+  const column = [{
+    name :"sakshi",
+    date : "23/4/23",
+    amount : 56,
+    status : "pending"
+  },{
+    name :"sakshi",
+    date : "23/4/23",
+    amount : 56,
+    status : "paid"
+  }]
+
+  const row1 = ["Name" , "Price","Units Sold"]
+  const column1 = [{
+    name :"sakshi",
+    price : 45,
+    unitsold : 200
+  },{
+    name :"sakshi",
+    price : 45,
+    unitsold : 200
+  }]
+  
+
   return(
     <>
     <Box>
-      <Table/>
+      <Table row={row} column={column}/>
+   
     </Box>
     </>
   )

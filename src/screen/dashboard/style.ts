@@ -29,7 +29,7 @@ export const ChartBox = styled(Box)({
       height:"469px",
       width:'825px',
       borderRadius:'6px',
-      boxShadow:"rgba(21, 34, 50, 0.08) 0px 8px 24px",
+      boxShadow: "0px 1px 4px 0px rgba(21, 34, 50, 0.08)",
     //   border:"1px solid red",
       padding:"15px 20px 15px 20px",
       justifyContent:"space-around"
