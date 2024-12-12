@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { CardBox, IconBox, ChartBox } from "./style";
+import { CardBox, IconBox, ChartBox, BaarChartBox } from "./style";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -16,7 +16,7 @@ import {
 import { Line } from "react-chartjs-2";
 
 import React from "react";
-import Table from "../../components/table/Table";
+import TableComponent from "../../components/table/TableComponent";
 
 type cardProp = {
   number: string;
@@ -26,10 +26,10 @@ type cardProp = {
 };
 
 type tableProp = {
-  name : string,
-  price : number,
-  unitsold : number
-}
+  name: string;
+  price: number;
+  unitsold: number;
+};
 
 export const Dashboard = () => {
   const card = [
@@ -139,11 +139,11 @@ export const Dashboard = () => {
           })}
         </Box>
         <Box>
-        <ChartSection />
+          <ChartSection />
         </Box>
         <Box>
-        <TableSection/>
-      </Box>
+          <TableSection />
+        </Box>
       </Box>
     </>
   );
@@ -228,83 +228,119 @@ const ChartSection = () => {
   };
   return (
     <>
-      <ChartBox>
-        <Box display="flex" justifyContent="space-between">
-          <Typography fontSize="16px" fontWeight="700">
-            Orders Over Time
-          </Typography>
-          <Box color="#5A607F" display="flex">
-            <Typography fontSize="14px" fontWeight="400">
-              Last 12 Hours
+      <Box display="flex" justifyContent="space-between">
+        <ChartBox>
+          <Box display="flex" justifyContent="space-between">
+            <Typography fontSize="16px" fontWeight="700">
+              Orders Over Time
             </Typography>
-            <KeyboardArrowDownIcon />
+            <Box color="#5A607F" display="flex">
+              <Typography fontSize="14px" fontWeight="400">
+                Last 12 Hours
+              </Typography>
+              <KeyboardArrowDownIcon />
+            </Box>
           </Box>
-        </Box>
-        <Box display="flex" gap={2}>
-          <Box>
-            <Typography fontSize="20px" fontWeight="700">
-              678
-            </Typography>
-            <Typography fontSize="14px" fontWeight="400" color="#5A607F">
-              Orders on May 22
-            </Typography>
+          <Box display="flex" gap={2}>
+            <Box>
+              <Typography fontSize="20px" fontWeight="700">
+                678
+              </Typography>
+              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                Orders on May 22
+              </Typography>
+            </Box>
+            <Box>
+              <Typography fontSize="20px" fontWeight="700">
+                650
+              </Typography>
+              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                Orders on June 22
+              </Typography>
+            </Box>
           </Box>
-          <Box>
-            <Typography fontSize="20px" fontWeight="700">
-              650
-            </Typography>
-            <Typography fontSize="14px" fontWeight="400" color="#5A607F">
-              Orders on June 22
-            </Typography>
+          <Box
+            height="297px"
+            width="800px"
+            display="flex"
+            justifyContent="center"
+          >
+            <Line data={data} />
           </Box>
-        </Box>
-        <Box
-          height="297px"
-          width="800px"
-          display="flex"
-          justifyContent="center"
-        >
-          <Line data={data} />
-        </Box>
-      </ChartBox>
-      
+        </ChartBox>
+
+        <BaarChartBox>
+          <Box
+            sx={{
+              borderBottom: "2px solid #E6E9F4",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              height: "230px",
+            }}
+          >
+            <Typography fontSize="16px" fontWeight="700">
+              Last 7 Days Sales
+            </Typography>
+            <Box>
+              <Typography fontSize="20px" fontWeight="700">
+                5,894
+              </Typography>
+              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                Items Sold
+              </Typography>
+            </Box>
+            <Box>
+              <Typography fontSize="20px" fontWeight="700">
+                $12,546
+              </Typography>
+              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                Revenue
+              </Typography>
+            </Box>
+          </Box>
+        </BaarChartBox>
+      </Box>
     </>
   );
 };
 
-const TableSection = () =>{
- 
-  const row = ["Name" , "Date","Amount" , "Status"]
-  const column = [{
-    name :"sakshi",
-    date : "23/4/23",
-    amount : 56,
-    status : "pending"
-  },{
-    name :"sakshi",
-    date : "23/4/23",
-    amount : 56,
-    status : "paid"
-  }]
+const TableSection = () => {
+  const row = ["Name", "Date", "Amount", "Status"];
+  const column = [
+    {
+      name: "sakshi",
+      date: "23/4/23",
+      amount: 56,
+      status: "pending",
+    },
+    {
+      name: "sakshi",
+      date: "23/4/23",
+      amount: 56,
+      status: "paid",
+    },
+  ];
 
-  const row1 = ["Name" , "Price","Units Sold"]
-  const column1 = [{
-    name :"sakshi",
-    price : 45,
-    unitsold : 200
-  },{
-    name :"sakshi",
-    price : 45,
-    unitsold : 200
-  }]
-  
+  const row1 = ["Name", "Price", "Units Sold"];
+  const column1 = [
+    {
+      name: "sakshi",
+      price: 45,
+      unitsold: 200,
+    },
+    {
+      name: "sakshi",
+      price: 45,
+      unitsold: 200,
+    },
+  ];
 
-  return(
+  return (
     <>
-    <Box>
-      <Table row={row} column={column}/>
-   
-    </Box>
+      <Box>
+        <TableComponent row={row} column={column} />
+      </Box>
     </>
-  )
-}
+  );
+};
