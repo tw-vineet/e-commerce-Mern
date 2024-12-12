@@ -137,7 +137,6 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
             ).required().messages({
                 'any.empty': `{{#label}} ${messages.IS_REQUIRED}`,
                 'string.empty': `{{#label}} ${messages.IS_REQUIRED}`,
-                'number.base': `{{#label}} ${messages.IS_REQUIRED}`,
                 'any.invalid': `{{#message}}`,
                 'string.uri': INVALID_URL_FORMATE
             })
@@ -166,11 +165,42 @@ export const categoryValidation = async (req: Request, res: Response, next: Next
         const validationSchema: joi.ObjectSchema = joi.object({
             categoryName: joi.string().required().label("Category name"),
             categoryCode: joi.string().required().label("Category code"),
+            categoryIcon: joi.alternatives().try(
+                joi.any().required().label('Category icon').custom((value, helpers) => {
+                    if (!value) {
+                        return helpers.error('any.required', { message: `{{#label}} ${IS_REQUIRED}` });
+                    } else if (typeof value !== 'string') {
+                        if (Array.isArray(value)) {
+                            return helpers.error('any.invalid', { message: ONE_IMAGE_ALLOWED });
+                        } else if (!validImageFormats.includes(value.mimetype)) {
+                            return helpers.error('any.invalid', { message: INVALID_IMAGE_FORMATE });
+                        }
+                        return value;
+                    } else {
+                        checkValidImage(value).then((status) => {
+                            if (status) {
+                                return value;
+                            } else {
+                                return helpers.error('any.invalid', { message: INVALID_URL_FORMATE });
+                            }
+                        })
+                    }
+                }),
+
+            ).required().messages({
+                'any.empty': `{{#label}} ${messages.IS_REQUIRED}`,
+                'string.empty': `{{#label}} ${messages.IS_REQUIRED}`,
+                'any.invalid': `{{#message}}`,
+                'string.uri': INVALID_URL_FORMATE
+            })
         }).options({ abortEarly: false, allowUnknown: true }).messages({
             'string.empty': `{{#label}} ${messages.IS_REQUIRED}`,
         });
 
-        const validatingData: dynamicObject = req.body
+        const validatingData: dynamicObject = {
+            ...req.body,
+            categoryIcon: req.files?.categoryIcon
+        };
         const errors = validateFormData(validatingData, validationSchema);
         if (errors) {
             return next(new ValidationError(errors))

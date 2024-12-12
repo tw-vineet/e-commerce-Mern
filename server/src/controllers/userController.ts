@@ -71,8 +71,6 @@ const updateUserDetails = async (req: Request, res: Response, next: NextFunction
     }
 };
 
-
-
 export const userController = {
     userDetails,
     updateUserDetails,

@@ -29,12 +29,7 @@ app.use(fileUpload({
 //routes
 app.use("/api", Routes);
 app.use("*", (req, res, next) => {
-    res.send(url.format({
-        protocol: req.protocol,
-        host: req.get('host'),
-        pathname: req.originalUrl
-    }))
-    // next(new NotFoundError(INVALID_REQUESTED_URL))
+    next(new NotFoundError(INVALID_REQUESTED_URL))
 });
 
 //Error handler middleware

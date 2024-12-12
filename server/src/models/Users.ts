@@ -55,6 +55,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("user", userSchema);
 export default User;
 
+
 //services
 export const createUser = async (data: Record<string, string>, next: NextFunction) => {
     try {

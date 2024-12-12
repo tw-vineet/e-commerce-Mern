@@ -30,5 +30,8 @@ export const messages: arrayObject = {
     SERVER_RUNNING_AT: "Server is running at",
     DATABASE_CONNECTED: "Database connected successfully.",
     DATABASE_CONNECTION_ERROR: "Database connection error",
+    USER_WITH_EMAIL_EXIST: "User with this email is already exist",
+    IS_ALREADY_TAKEN_FOR: "is already taken for",
+    ALREADY_EXIST: "already exist"
 }
 

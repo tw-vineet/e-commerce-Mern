@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express";
+import { ErrorRequestHandler } from 'express';
 import { logger } from "../helper/services/logger.js";
 import { messages } from "../helper/utils/messages.js";
+import { arrayObject, errorResponse, ExtendedError } from "../DataTypes/dataTypes.js";
 
-const { VALIDATION_ERROR, SOMETHING_WENT_WRONG } = messages;
+const { VALIDATION_ERROR, SOMETHING_WENT_WRONG, IS_ALREADY_TAKEN_FOR } = messages;
 // base error class
 export class BaseError extends Error {
     status: boolean;
@@ -31,6 +33,14 @@ export class UnAuthorizedError extends BaseError {
     }
 }
 
+// Already exist error class
+export class AlreadyExistError extends BaseError {
+    constructor(message: string) {
+        super(message, false, 400);
+        Object.setPrototypeOf(this, AlreadyExistError.prototype);
+    }
+}
+
 // validation error class
 export class ValidationError extends BaseError {           // missing user input
     errorData: Record<string, string>
@@ -42,48 +52,62 @@ export class ValidationError extends BaseError {           // missing user input
 }
 
 // error handler middleware
-export const errorHandler: any = (err: Error, req: Request, res: Response, next: NextFunction) => {
-    // logger.error("error::", err)
+export const errorHandler = (err: ExtendedError, req: Request, res: Response, next: NextFunction) => {
+    logger.error("error::", err)
     if (err instanceof ValidationError) {
-        return res.status(err.statusCode).json({
+        res.status(err.statusCode).json({
             status: false,
             statusCode: err.statusCode,
             message: err.message,
             data: err.errorData
         })
-    } if (err instanceof NotFoundError) {
-        return res.status(err.statusCode).json({
+        return;
+    }
+
+    if (err instanceof NotFoundError || err instanceof UnAuthorizedError || err instanceof AlreadyExistError) {
+        res.status(err.statusCode).json({
             status: false,
             statusCode: err.statusCode,
             message: err.message,
         })
+        return;
+    }
 
-    } if (err instanceof UnAuthorizedError) {
-        return res.status(err.statusCode).json({
-            status: false,
-            statusCode: err.statusCode,
-            message: err.message,
-        })
-    } else {
-        if (err.stack) {
-            const cleanedStack = err.stack
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line.startsWith('at'))
-                .join('\n');
-
-            return res.status(500).json({
-                status: false,
-                statusCode: 500,
-                message: err.message,
-                stack: cleanedStack
-            })
+    if (err.code === 11000) {
+        const key = Object.keys(err.errorResponse.keyValue)[0];
+        const value = Object.values(err.errorResponse.keyValue)[0];
+        let errorData = {
+            [key]: `${value} ${IS_ALREADY_TAKEN_FOR} ${key}.`
         }
-        return res.status(500).json({
+        res.status(400).json({
+            status: false,
+            statusCode: 400,
+            data: errorData,
+            message: ValidationError,
+        })
+        return
+    }
+
+    if (err.stack) {
+        const cleanedStack = err.stack
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.startsWith('at'))
+            .join('\n');
+
+        res.status(500).json({
             status: false,
             statusCode: 500,
-            message: SOMETHING_WENT_WRONG,
-            error: err.stack
+            message: err.message,
+            stack: cleanedStack
         })
+        return
     }
+    res.status(500).json({
+        status: false,
+        statusCode: 500,
+        message: SOMETHING_WENT_WRONG,
+        error: err.stack
+    })
+    return;
 }
