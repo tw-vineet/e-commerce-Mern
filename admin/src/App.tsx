@@ -8,16 +8,16 @@ function App() {
   return (
     
     <>
-    <Box>
-     <Box >
+    
+     
       <Header/>
-     </Box>
+     
      <Box display="flex">
       <SideBar/>
       <Dashboard/>
      
      </Box>
-    </Box>
+   
      
     </>
     

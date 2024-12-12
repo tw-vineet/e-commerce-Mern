@@ -12,11 +12,19 @@ import {
   Title,
   Tooltip,
   Legend,
+  registerables,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 
 import React from "react";
 import TableComponent from "../../components/table/TableComponent";
+import styled from "styled-components";
+
+const IconStyle = styled(KeyboardArrowDownIcon)({
+  "&.css-1umw9bq-MuiSvgIcon-root": {
+    fontSize: 50,
+  },
+});
 
 type cardProp = {
   number: string;
@@ -37,14 +45,7 @@ export const Dashboard = () => {
       number: "3456",
       title: "hello",
       percentage: "20%",
-      icon: (
-        <KeyboardArrowDownIcon
-          sx={{
-            height: "12px",
-            width: "12px",
-          }}
-        />
-      ),
+      icon: <IconStyle />,
     },
     {
       number: "3456",
@@ -226,6 +227,16 @@ const ChartSection = () => {
       },
     ],
   };
+  const barChartLabels = ["Jan", "Feb", "March", "April", "May", "June"];
+  const barChartData = {
+    barChartLabels,
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [65, 59, 80, 81, 56, 55, 40],
+      },
+    ],
+  };
   return (
     <>
       <Box display="flex" justifyContent="space-between">
@@ -299,6 +310,7 @@ const ChartSection = () => {
               </Typography>
             </Box>
           </Box>
+          <Box>{/* <Bar data={barChartData}/> */}</Box>
         </BaarChartBox>
       </Box>
     </>
