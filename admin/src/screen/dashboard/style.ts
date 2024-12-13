@@ -1,4 +1,4 @@
-  import { Box } from "@mui/material";
+import { Box } from "@mui/material";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
@@ -44,5 +44,13 @@ export const BaarChartBox = styled(Box)({
   padding: "28px",
 });
 
-
-
+export const ManageBox = styled(Box)({
+  width: "129px",
+  height: "40px",
+  color: "#1E5EFF",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-around",
+  backgroundColor: "white",
+  border: "1px solid #D7DBEC",
+});

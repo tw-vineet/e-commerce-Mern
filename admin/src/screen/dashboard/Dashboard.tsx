@@ -1,8 +1,11 @@
-import { Box, Typography } from "@mui/material";
-import { CardBox, IconBox, ChartBox, BaarChartBox } from "./style";
+import { Box, Grid2, Typography } from "@mui/material";
+import { CardBox, IconBox, ChartBox, BaarChartBox, ManageBox } from "./style";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import existingUserImage from "../../asset/images/dashboard/existingUser.png"
+import newUserImage from "../../asset/images/dashboard/newUser.png"
+import uniqueVisitsImage from "../../asset/images/dashboard/uniqueVisits.png"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,7 +25,7 @@ import styled from "styled-components";
 
 const IconStyle = styled(KeyboardArrowDownIcon)({
   "&.css-1umw9bq-MuiSvgIcon-root": {
-    fontSize: 50,
+    fontSize: 15,
   },
 });
 
@@ -31,6 +34,10 @@ type cardProp = {
   title: string;
   percentage: string;
   icon: React.ReactNode;
+  image : {
+    isImage : boolean,
+    source :  string | React.ReactNode 
+  }
 };
 
 type tableProp = {
@@ -46,58 +53,50 @@ export const Dashboard = () => {
       title: "hello",
       percentage: "20%",
       icon: <IconStyle />,
+      image:{
+        isImage : false,
+        source : <ShoppingCartOutlinedIcon/>
+      }
     },
     {
       number: "3456",
       title: "hello",
       percentage: "20%",
-      icon: (
-        <KeyboardArrowDownIcon
-          sx={{
-            height: "12px",
-            width: "12px",
-          }}
-        />
-      ),
+      icon: <IconStyle />,
+      image:{
+        isImage : false,
+        source : <ShoppingCartOutlinedIcon/>
+      }
     },
     {
       number: "3456",
       title: "hello",
       percentage: "20%",
-      icon: (
-        <KeyboardArrowDownIcon
-          sx={{
-            height: "12px",
-            width: "12px",
-          }}
-        />
-      ),
+      icon: <IconStyle />,
+      image:{
+        isImage : true,
+        source : "uniqueVisitsImage"
+      }
     },
     {
       number: "3456",
       title: "hello",
       percentage: "20%",
-      icon: (
-        <KeyboardArrowDownIcon
-          sx={{
-            height: "12px",
-            width: "12px",
-          }}
-        />
-      ),
+      icon: <IconStyle />,
+      image:{
+        isImage : true,
+        source : "newUserImage"
+      }
     },
     {
       number: "3456",
       title: "hello",
       percentage: "20%",
-      icon: (
-        <KeyboardArrowDownIcon
-          sx={{
-            height: "12px",
-            width: "12px",
-          }}
-        />
-      ),
+      icon: <IconStyle />,
+      image:{
+        isImage : true,
+        source : "existingUserImage"
+      }
     },
   ];
 
@@ -114,27 +113,21 @@ export const Dashboard = () => {
           <Typography fontWeight="700" fontSize="24px">
             Dashboard
           </Typography>
-          <Box
-            width="129px"
-            height="40px"
-            color="#1E5EFF"
-            display="flex"
-            alignItems="center"
-            justifyContent="space-around"
-            sx={{ backgroundColor: "white", border: "1px solid #D7DBEC" }}
-          >
+          <ManageBox>
             <SettingsOutlinedIcon />
             <Typography>Manage</Typography>
-          </Box>
+          </ManageBox>
         </Box>
         <Box display="flex" gap={4}>
           {card.map((item) => {
+            console.log(item.image)
             return (
               <Card
                 number={item.number}
                 title={item.title}
                 percentage={item.percentage}
                 icon={item.icon}
+                image = {item.image}
               />
             );
           })}
@@ -150,9 +143,10 @@ export const Dashboard = () => {
   );
 };
 
-const Card: React.FC<cardProp> = ({ number, title, percentage, icon }) => {
+const Card: React.FC<cardProp> = ({ number, title, percentage, icon , image }) => {
+  console.log("Card 5",image)
   return (
-    <>
+    
       <CardBox>
         <Box display="flex" flexDirection="column" justifyContent="center">
           <Typography fontSize="16px" fontWeight="700">
@@ -171,17 +165,19 @@ const Card: React.FC<cardProp> = ({ number, title, percentage, icon }) => {
           </Box>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <IconBox>
+       
+          {image.isImage === true ? <img/> : <IconBox>{image.source}</IconBox>}
+          {/* <IconBox>
             <ShoppingCartOutlinedIcon
               sx={{
                 height: "12px",
                 width: "12px",
               }}
             />
-          </IconBox>
+          </IconBox> */}
         </Box>
       </CardBox>
-    </>
+   
   );
 };
 
@@ -239,80 +235,85 @@ const ChartSection = () => {
   };
   return (
     <>
-      <Box display="flex" justifyContent="space-between">
-        <ChartBox>
-          <Box display="flex" justifyContent="space-between">
-            <Typography fontSize="16px" fontWeight="700">
-              Orders Over Time
-            </Typography>
-            <Box color="#5A607F" display="flex">
-              <Typography fontSize="14px" fontWeight="400">
-                Last 12 Hours
+      <Grid2 container display="flex" spacing={2}>
+        <Grid2 size={{ lg: 9 }}>
+          <ChartBox>
+            <Box display="flex" justifyContent="space-between">
+              <Typography fontSize="16px" fontWeight="700">
+                Orders Over Time
               </Typography>
-              <KeyboardArrowDownIcon />
+              <Box color="#5A607F" display="flex">
+                <Typography fontSize="14px" fontWeight="400">
+                  Last 12 Hours
+                </Typography>
+                <KeyboardArrowDownIcon />
+              </Box>
             </Box>
-          </Box>
-          <Box display="flex" gap={2}>
-            <Box>
-              <Typography fontSize="20px" fontWeight="700">
-                678
-              </Typography>
-              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
-                Orders on May 22
-              </Typography>
+            <Box display="flex" gap={2}>
+              <Box>
+                <Typography fontSize="20px" fontWeight="700">
+                  678
+                </Typography>
+                <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                  Orders on May 22
+                </Typography>
+              </Box>
+              <Box>
+                <Typography fontSize="20px" fontWeight="700">
+                  650
+                </Typography>
+                <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                  Orders on June 22
+                </Typography>
+              </Box>
             </Box>
-            <Box>
-              <Typography fontSize="20px" fontWeight="700">
-                650
-              </Typography>
-              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
-                Orders on June 22
-              </Typography>
+            <Box
+              height="297px"
+              width="800px"
+              display="flex"
+              justifyContent="center"
+            >
+              <Line data={data} />
             </Box>
-          </Box>
-          <Box
-            height="297px"
-            width="800px"
-            display="flex"
-            justifyContent="center"
-          >
-            <Line data={data} />
-          </Box>
-        </ChartBox>
+          </ChartBox>
+        </Grid2>
 
-        <BaarChartBox>
-          <Box
-            sx={{
-              borderBottom: "2px solid #E6E9F4",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              height: "230px",
-            }}
-          >
-            <Typography fontSize="16px" fontWeight="700">
-              Last 7 Days Sales
-            </Typography>
-            <Box>
-              <Typography fontSize="20px" fontWeight="700">
-                5,894
+        <Grid2 size={{ lg: 3 }}>
+          {" "}
+          <BaarChartBox>
+            <Box
+              sx={{
+                borderBottom: "2px solid #E6E9F4",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly",
+                height: "230px",
+              }}
+            >
+              <Typography fontSize="16px" fontWeight="700">
+                Last 7 Days Sales
               </Typography>
-              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
-                Items Sold
-              </Typography>
+              <Box>
+                <Typography fontSize="20px" fontWeight="700">
+                  5,894
+                </Typography>
+                <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                  Items Sold
+                </Typography>
+              </Box>
+              <Box>
+                <Typography fontSize="20px" fontWeight="700">
+                  $12,546
+                </Typography>
+                <Typography fontSize="14px" fontWeight="400" color="#5A607F">
+                  Revenue
+                </Typography>
+              </Box>
             </Box>
-            <Box>
-              <Typography fontSize="20px" fontWeight="700">
-                $12,546
-              </Typography>
-              <Typography fontSize="14px" fontWeight="400" color="#5A607F">
-                Revenue
-              </Typography>
-            </Box>
-          </Box>
-          <Box>{/* <Bar data={barChartData}/> */}</Box>
-        </BaarChartBox>
-      </Box>
+            <Box>{/* <Bar data={barChartData}/> */}</Box>
+          </BaarChartBox>
+        </Grid2>
+      </Grid2>
     </>
   );
 };
@@ -350,9 +351,23 @@ const TableSection = () => {
 
   return (
     <>
-      <Box>
-        <TableComponent row={row} column={column} />
-      </Box>
+      <Grid2 container display="flex" spacing={4}>
+        <Grid2 size={{ lg: 6 }} width="540px">
+          <TableComponent
+            row={row}
+            column={column}
+            header={"Recent Transaction"}
+          />
+        </Grid2>
+
+        <Grid2 size={{ lg: 6 }} width="540px">
+          <TableComponent
+            row={row}
+            column={column}
+            header={"Top Products by Units Sold"}
+          />
+        </Grid2>
+      </Grid2>
     </>
   );
 };

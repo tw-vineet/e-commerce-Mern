@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const SidebarBox = styled(Box)(( {theme})=>({   
   backgroundColor: `${theme.palette.primary.main}`,
   height: "100vh",
-  width: "250px",
+  width: "20%",
   display: "flex",
   flexDirection: "column",
   padding: "10px",

@@ -6,7 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import React from "react";
 
 type tableProps = {
@@ -17,14 +16,15 @@ type tableProps = {
     amount: number;
     status: string;
   }[];
+  header : string
 };
 
-const TableComponent: React.FC<tableProps> = ({ row, column }) => {
+const TableComponent: React.FC<tableProps> = ({ row, column,header}) => {
   return (
     <>
       <TableBox>
         <Typography fontWeight="700" fontSize="16px">
-          Header
+         {header}
         </Typography>
         <TableContainer >
       <Table  size="small">
