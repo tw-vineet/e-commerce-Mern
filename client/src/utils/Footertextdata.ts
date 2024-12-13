@@ -1,8 +1,5 @@
 import { iFooterData } from "../Dto/dataType"
 
-
-
-
 export let footerData: iFooterData = {
   Support: [
     "111 Bijoy sarani, Dhaka, DH 1515, Bangladesh",
@@ -12,5 +9,4 @@ export let footerData: iFooterData = {
   Account: ["My Account", "Login / Register", "Cart", "Wishlist", "Shop"],
 
   "Quick Links": ["Privacy Policy", "Terms of Use", "FAQ", "Contact"],
-  
 }
