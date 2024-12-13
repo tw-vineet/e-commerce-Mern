@@ -9,14 +9,11 @@ export interface signUpDetails{
     userPassword:String
 }
 
-export interface buttonCs {
-    width: string
-    background: string
-    "border-radius": string,
-    "margin-top"?:string,
-    color?:string,
-    border?:string
-    "margin-bottom"?:string
 
-  }
-  
+export interface iFooterData{
+    Support:string[],
+    Account:string[],
+    "Quick Links":string[],
+    
+    
+}
