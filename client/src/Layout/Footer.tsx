@@ -1,57 +1,67 @@
-import { Box, Container, Grid2, Typography ,Divider} from "@mui/material"
 import React from "react"
-import Input from "../component/Input"
+import { Box, Container, Grid2, Typography, Divider } from "@mui/material"
+import { styled } from "@mui/system"
 import SendIcon from "@mui/icons-material/Send"
-import Qrimagefooter from "../image/Frame 719.png"
 import FacebookIcon from "@mui/icons-material/Facebook"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
-import { styled } from '@mui/system'
+import Input from "../component/Input"
+import { footerData } from "../utils/Footertextdata"
+import Qrimagefooter from "../image/Frame 719.png"
 
-const FooterBox = styled(Box)`
-  background-color: black;
-  padding: 30px 0px 30px 0px;
 
-`
-const FooterInput = styled(Box)`
-  border: 1px solid white;
-  width: 210px;
-  height: 46px;
-  margin-top: 16px;
-`
+const FooterBox = styled(Box)(({ theme }) => ({
+  "background-color": " black",
+  padding: "30px 0px 30px 0px",
+}))
+
+const FooterInput = styled(Box)(({ theme }) => ({
+  border: "1px solid white",
+  width: "210px",
+  height: " 46px",
+  " margin-top": "16px",
+}))
 
 const ConatinerFooter = styled(Container)(({ theme }) => ({
   marginTop: "40px",
-  marginBottom: "30px"
+  marginBottom: "30px",
 }))
 
 const StyledDivider = styled(Divider)(({ theme }) => ({
-  border: `1px solid #262525`
+  border: `1px solid #262525`,
 }))
 const Footimg = styled("img")(() => ({
-
   width: " 204px",
-  height: "85px"
+  height: "85px",
+  margin: "20px 0px 20px 0px",
 }))
 
+const Footertext = styled(Typography)(({ theme }) => ({
+  "margin-top": "25px",
+  color: "white",
+}))
+
+const FooterSrchIcon = styled(SendIcon)(({ theme }) => ({
+  color: "white",
+  "margin-right": "12px",
+}))
+
+
 export default function Footer() {
+  const { Support, Account } = footerData
   return (
     <>
       <FooterBox>
         <ConatinerFooter>
-          <Grid2 container columnSpacing={5}>
+          <Grid2 container columnSpacing={4}>
             <Grid2 size={3}>
               <Box>
-                <Typography variant="h4" sx={{ color: "white", mb: 2 }}>
-                  Exclisive
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white", mb: 2 }}>
-                  Subscribe
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
+                <Footertext variant="h4">Exclisive</Footertext>
+                <Footertext variant="h6">Subscribe</Footertext>
+                <Footertext variant="subtitle2">
                   Get 10% off your first order
-                </Typography>
+                </Footertext>
                 <FooterInput
                   display={"flex"}
                   justifyContent={"center"}
@@ -71,94 +81,50 @@ export default function Footer() {
                       },
                     }}
                   ></Input>
-
-                  <SendIcon sx={{ color: "white", mr: 2 }} />
+                  <FooterSrchIcon />
                 </FooterInput>
               </Box>
             </Grid2>
 
-            <Grid2 size={2}>
-              <Box>
-                <Typography variant="h5" sx={{ color: "white", mb: 2 }}>
-                  Support
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  111 Bijoy sarani, Dhaka, DH 1515, Bangladesh
-                </Typography>
+            {Object.entries(footerData).map((value: [string, []], key: number) => {
 
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  exclusive@gmail.com
-                </Typography>
+              return (
+                <>
+                  <Grid2 size={2}>
+                    <Box>
+                      <Footertext variant="h6">{value[0]}</Footertext>
+                      <Box>
+                        {value[1].map((value: string) => {
 
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  +88015-88888-9999
-                </Typography>
-              </Box>
-            </Grid2>
-            <Grid2 size={2}>
-              <Box>
-                <Typography variant="h5" sx={{ color: "white", mb: 2 }}>
-                  Account
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  My Account
-                </Typography>
-
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Login / Register
-                </Typography>
-
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Cart
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Wishlist
-                </Typography>
-
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Shop
-                </Typography>
-              </Box>
-            </Grid2>
-
-            <Grid2 size={2}>
-              <Box>
-                <Typography variant="h5" sx={{ color: "white", mb: 2 }}>
-                  Quik Links
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Privacy Policy
-                </Typography>
-
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Terms of Use
-                </Typography>
-
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  FAQ
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
-                  Contact
-                </Typography>
-              </Box>
-            </Grid2>
+                          return (
+                            <>
+                              <Footertext variant="subtitle2">
+                                {value}
+                              </Footertext>
+                            </>
+                          )
+                        })}
+                      </Box>
+                    </Box>
+                  </Grid2>
+                </>
+              )
+            })}
 
             <Grid2 size={3}>
               <Box>
-                <Typography variant="h5" sx={{ color: "white", mb: 2 }}>
-                  Download App
-                </Typography>
-                <Typography variant="subtitle2" sx={{ color: "white", mb: 2 }}>
+                <Footertext variant="h5">Download App</Footertext>
+                <Footertext variant="subtitle2">
                   save $3 with App New User Only
-                </Typography>
+                </Footertext>
 
                 <Footimg src={Qrimagefooter} />
 
-                <Box display={"flex"}>
-                  <FacebookIcon sx={{ color: "white", mr: 2 }} />
-                  <LinkedInIcon sx={{ color: "white", mr: 2 }} />
-                  <InstagramIcon sx={{ color: "white", mr: 2 }} />
-                  <TwitterIcon sx={{ color: "white", mr: 2 }}/>
+                <Box display={"flex"} gap={3} color={"white"}>
+                  <FacebookIcon />
+                  <LinkedInIcon />
+                  <InstagramIcon />
+                  <TwitterIcon />
                 </Box>
               </Box>
             </Grid2>
@@ -167,12 +133,10 @@ export default function Footer() {
         <StyledDivider />
         <Box textAlign={"center"}>
           <Typography variant="subtitle2" sx={{ color: "gray", mt: 2 }}>
-            &copy;  CopyWrite Rimel 2025.All
-            Right Reserved
+            &copy; Copyright Rimel 2025.All Right Reserved
           </Typography>
         </Box>
       </FooterBox>
-
     </>
   )
 }

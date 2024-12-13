@@ -9,11 +9,6 @@ import { ThemeProvider, createTheme } from "@mui/material"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
-// const theme = createTheme({
-//   typography: {
-//     fontFamily: "Poppins",
-//   },
-// });
 
 const theme = createTheme({
   palette:
