@@ -1,15 +1,15 @@
-export interface loginDetails {
+export interface ILoginDetails {
   loginEmail: string | undefined
   loginPassword: string
 }
-export interface signUpDetails {
+export interface ISignUpDetails {
   userName: String
   userEmail: String
   userPhone: String
   userPassword: String
 }
 
-export interface iFooterData {
+export interface IFooterData {
   Support: string[]
   Account: string[]
   "Quick Links": string[]

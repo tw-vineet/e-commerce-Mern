@@ -1,6 +1,6 @@
-import { iFooterData } from "../Dto/dataType"
+import { IFooterData } from "../Dto/dataType"
 
-export let footerData: iFooterData = {
+export let footerData: IFooterData = {
   Support: [
     "111 Bijoy sarani, Dhaka, DH 1515, Bangladesh",
     "exclusive@gmail.com",
