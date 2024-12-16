@@ -54,3 +54,9 @@ export const ManageBox = styled(Box)({
   backgroundColor: "white",
   border: "1px solid #D7DBEC",
 });
+
+export const IconStyle = styled(KeyboardArrowDownIcon)({
+  "&.css-1umw9bq-MuiSvgIcon-root": {
+    fontSize: 15,
+  },
+});

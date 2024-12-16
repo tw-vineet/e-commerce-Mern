@@ -1,5 +1,5 @@
 import { Box, Grid2, Typography } from "@mui/material";
-import { CardBox, IconBox, ChartBox, BaarChartBox, ManageBox } from "./style";
+import { CardBox, IconBox, ChartBox, BaarChartBox, ManageBox , IconStyle } from "./style";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -23,11 +23,7 @@ import React from "react";
 import TableComponent from "../../components/table/TableComponent";
 import styled from "styled-components";
 
-const IconStyle = styled(KeyboardArrowDownIcon)({
-  "&.css-1umw9bq-MuiSvgIcon-root": {
-    fontSize: 15,
-  },
-});
+
 
 type cardProp = {
   number: string;
