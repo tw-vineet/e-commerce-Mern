@@ -7,6 +7,9 @@ export const MuiBox = styled(Box)({
   height: "68px",
   display: "flex",
   justifyContent: "space-between",
+  // position:"fixed",
+  // zIndex:1,
+
 });
 
 export const ProfileBox = styled(Box)({

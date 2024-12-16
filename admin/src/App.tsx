@@ -9,7 +9,9 @@ function App() {
       <Header />
       <Box display="flex">
         <SideBar />
-        <Dashboard />
+        <Box sx={{ width: "100%", height: "100vh", overflow: "auto" }}>
+          <Dashboard />
+        </Box>
       </Box>
     </>
   );

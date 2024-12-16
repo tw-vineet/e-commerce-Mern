@@ -9,6 +9,7 @@ import { MuiBox ,ProfileBox} from "./style";
 export const Header = () => {
   return (
     <>
+    
       <MuiBox>
         <Box>
           <img src={logo} />
@@ -35,6 +36,7 @@ export const Header = () => {
           </Grid2>
         </Box>
       </MuiBox>
+      
     </>
   );
 };

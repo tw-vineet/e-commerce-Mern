@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Grid2 } from "@mui/material";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
@@ -41,7 +41,8 @@ export const BaarChartBox = styled(Box)({
   borderRadius: "6px",
   backgroundColor: "#FFFFFF",
   boxShadow: "0px 1px 4px 0px rgba(21, 34, 50, 0.08)",
-  padding: "28px",
+  // padding: "28px",
+  padding: "15px 28px 15px 28px",
 });
 
 export const ManageBox = styled(Box)({
@@ -60,3 +61,25 @@ export const IconStyle = styled(KeyboardArrowDownIcon)({
     fontSize: 15,
   },
 });
+
+export const LineChartBox = styled(Box)({
+  height: "297px",
+  width: "800px",
+  display: "flex",
+  justifyContent: "center",
+});
+
+export const BaarChartHeader = styled(Box)({
+  borderBottom: "2px solid #E6E9F4",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  height: "230px",
+});
+ 
+export const BarChartSection = styled(Box)({
+  display:"flex",
+  justifyContent:"center",
+  alignItems:"center",
+  height:"200px"
+})
