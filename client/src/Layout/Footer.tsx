@@ -8,11 +8,12 @@ import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import Input from "../component/Input"
 import { footerData } from "../utils/Footertextdata"
+// @ts-ignore
 import Qrimagefooter from "../image/Frame 719.png"
 
 
 const FooterBox = styled(Box)(({ theme }) => ({
-  "background-color": " black",
+  backgroundColor: "black",
   padding: "30px 0px 30px 0px",
 }))
 
@@ -20,7 +21,7 @@ const FooterInput = styled(Box)(({ theme }) => ({
   border: "1px solid white",
   width: "210px",
   height: " 46px",
-  " margin-top": "16px",
+  marginTop: "16px",
 }))
 
 const ConatinerFooter = styled(Container)(({ theme }) => ({
@@ -38,18 +39,19 @@ const Footimg = styled("img")(() => ({
 }))
 
 const Footertext = styled(Typography)(({ theme }) => ({
-  "margin-top": "25px",
+  marginTop: "25px",
   color: "white",
 }))
 
 const FooterSrchIcon = styled(SendIcon)(({ theme }) => ({
   color: "white",
-  "margin-right": "12px",
+  marginRight: "12px",
 }))
 
 
 export default function Footer() {
-  const { Support, Account } = footerData
+
+
   return (
     <>
       <FooterBox>
@@ -80,25 +82,26 @@ export default function Footer() {
                         border: 0,
                       },
                     }}
-                  ></Input>
+                  />
                   <FooterSrchIcon />
                 </FooterInput>
               </Box>
             </Grid2>
 
-            {Object.entries(footerData).map((value: [string, []], key: number) => {
+
+            {Object.entries(footerData).map((value: [string, []], index: number) => {
 
               return (
                 <>
-                  <Grid2 size={2}>
+                  < Grid2 size={2} >
                     <Box>
-                      <Footertext variant="h6">{value[0]}</Footertext>
+                      <Footertext key={index} variant="h6">{value[0]}</Footertext>
                       <Box>
                         {value[1].map((value: string) => {
 
                           return (
                             <>
-                              <Footertext variant="subtitle2">
+                              <Footertext key={index} variant="subtitle2">
                                 {value}
                               </Footertext>
                             </>
@@ -106,7 +109,7 @@ export default function Footer() {
                         })}
                       </Box>
                     </Box>
-                  </Grid2>
+                  </Grid2 >
                 </>
               )
             })}
@@ -129,14 +132,14 @@ export default function Footer() {
               </Box>
             </Grid2>
           </Grid2>
-        </ConatinerFooter>
+        </ConatinerFooter >
         <StyledDivider />
         <Box textAlign={"center"}>
-          <Typography variant="subtitle2" sx={{ color: "gray", mt: 2 }}>
+          <Typography variant="subtitle2" color={"gray"} marginTop={2}>
             &copy; Copyright Rimel 2025.All Right Reserved
           </Typography>
         </Box>
-      </FooterBox>
+      </FooterBox >
     </>
   )
 }

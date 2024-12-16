@@ -1,71 +1,68 @@
-import * as React from 'react'
-import { Box, Container, Grid2, Link } from '@mui/material'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import styled from 'styled-components'
-import { useEffect } from 'react'
-import AOS from 'aos'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import SearchIcon from '@mui/icons-material/Search'
-import Input from '../component/Input'
+import * as React from "react"
+import { Box, Container, Grid2, Link } from "@mui/material"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+import styled from "styled-components"
+import { useEffect } from "react"
+import AOS from "aos"
+import FavoriteIcon from "@mui/icons-material/Favorite"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import SearchIcon from "@mui/icons-material/Search"
+import Input from "../component/Input"
 
 // Styling the Navbar text
 const NavbarText = styled(Typography)(({ theme }) => ({
-  color: ' white',
-  'font-family': 'poppins'
+  color: " white",
+  fontFamily: "poppins",
 }))
 
 const TopBar = styled(Box)(({ theme }) => ({
-  'background-color': 'black',
+  backgroundColor: "black",
 
-  display: 'flex',
+  display: "flex",
 
-  'justify-content': 'center',
+  justifyContent: "center",
 
-  height: '44px'
+  height: "44px",
 }))
 
 const Navbartext = styled(Typography)(({ theme }) => ({
-  'font-family': 'Poppins'
+  fontFamily: "Poppins",
 }))
 
 const Bartext = styled(Grid2)(({ theme }) => ({
-  display: 'flex',
-  'justify-content': 'space-evenly',
-  'align-items': 'center'
+  display: "flex",
+  justifyContent: "space-evenly",
+  alignItems: "center",
 }))
 
 const Searchbar = styled(Grid2)(({ theme }) => ({
-  display: 'flex',
-  'justify-content': 'center',
-  'align-items': 'center'
-
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 }))
 
 const NavbarMain = styled(Box)(({ theme }) => ({
-  display: ' flex',
-  'justify-content': 'center',
-  'align-items': 'center',
-  'margin-top': '30px'
+  display: " flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: "30px",
 }))
 
 const Searchicon = styled(SearchIcon)(({ theme }) => ({
   position: "relative",
-  right: "27px"
-
+  right: "27px",
 }))
 
 const InputBox = styled(Box)(({ theme }) => ({
-  opacity: '50%',
-  w: 4
-
+  opacity: "50%",
+  w: 4,
 }))
 
 export default function Navbar() {
   useEffect(() => {
     AOS.init({
-      duration: 2000
+      duration: 2000,
     })
   }, [])
 
@@ -84,36 +81,36 @@ export default function Navbar() {
         <Container>
           <Grid2
             container
-            alignItems={'center'}
-            justifyContent={'center'}
+            alignItems={"center"}
+            justifyContent={"center"}
             spacing={4}
           >
             <Grid2 size={2}>
-              <Typography variant='h4'> Exclisive </Typography>
+              <Typography variant="h4"> Exclisive </Typography>
             </Grid2>
 
             <Bartext size={6}>
               <Box>
                 <Navbartext></Navbartext>
-                <Link color={'black'} href='#' underline='hover'>
+                <Link color={"black"} href="#" underline="hover">
                   Home
                 </Link>
               </Box>
               <Box>
-                <Link color={'black'} href='#' underline='hover'>
+                <Link color={"black"} href="#" underline="hover">
                   Contact
                 </Link>
               </Box>
               <Box>
-                <Link color={'black'} href='#' underline='hover'>
+                <Link color={"black"} href="#" underline="hover">
                   About
                 </Link>
               </Box>
               <Box>
                 <Link
-                  color={'black'}
-                  href='../../Screen/Signup.tsx'
-                  underline='hover'
+                  color={"black"}
+                  href="../../Screen/Signup.tsx"
+                  underline="hover"
                 >
                   Sign Up
                 </Link>
@@ -121,18 +118,18 @@ export default function Navbar() {
             </Bartext>
 
             <Searchbar size={4}>
-              <Box sx={{ opacity: '50%', w: 4 }} >
+              <InputBox>
                 <Input
-                  type='text'
-                  label='what are you looking for ?'
-                  name='usearch'
-                  variant='outlined'
+                  type="text"
+                  label="what are you looking for ?"
+                  name="usearch"
+                  variant="outlined"
                   styleProps={{ w: 4 }}
                 />
-              </Box>
+              </InputBox>
               <Searchicon />
-              <Box display={'flex'}>
-                <FavoriteIcon sx={{ mr: 2 }} />
+              <Box display={"flex"}>
+                <FavoriteIcon />
                 <ShoppingCartIcon />
               </Box>
             </Searchbar>

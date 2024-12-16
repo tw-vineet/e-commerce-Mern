@@ -2,7 +2,7 @@ import { TextField } from "@mui/material"
 
 
 
-interface Iprops {
+interface IProps {
   type: string
   label: string
   styleProps?: any
@@ -20,7 +20,7 @@ export default function Input({
   name,
   variant,
 
-}: Iprops) {
+}: IProps) {
 
   return (
     <>

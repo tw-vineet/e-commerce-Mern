@@ -14,3 +14,13 @@ export interface IFooterData {
   Account: string[]
   "Quick Links": string[]
 }
+
+export interface IButtonStyle {
+  width: string
+  background: string
+  borderRadius: string
+  color?: string
+  border?: string
+  marginTop?: string
+  marginBottom?: string
+}
