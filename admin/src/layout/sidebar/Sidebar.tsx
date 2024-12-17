@@ -48,7 +48,7 @@ export const SideBar = () => {
           return (
             <PageBox>
               <Box height="24px"> {item.icon}</Box>
-              <Typography sx={{ fontWeight: 400, fontSize: "14px" }}>
+              <Typography fontWeight={400} fontSize="14px" >
                 {item.name}
               </Typography>
             </PageBox>

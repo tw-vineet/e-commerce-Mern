@@ -1,4 +1,4 @@
-import { Box, Grid2, Typography } from "@mui/material";
+import { Box, Button, Grid2, Typography } from "@mui/material";
 import {
   CardBox,
   IconBox,
@@ -9,8 +9,10 @@ import {
   LineChartBox,
   BaarChartHeader,
   BarChartSection,
+  TableBox,
 } from "./style";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import existingUserImage from "../../asset/images/dashboard/existingUser.png";
@@ -27,13 +29,11 @@ import {
   Legend,
   BarElement,
   BarController,
-  layouts,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 
 import React from "react";
-import TableComponent from "../../components/table/TableComponent";
-import styled from "styled-components";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 type cardProp = {
   number: string;
@@ -46,12 +46,6 @@ type cardProp = {
   };
 };
 
-type tableProp = {
-  name: string;
-  price: number;
-  unitsold: number;
-};
-
 export const Dashboard = () => {
   const card = [
     {
@@ -61,7 +55,7 @@ export const Dashboard = () => {
       icon: <IconStyle />,
       image: {
         isImage: false,
-        source: <ShoppingCartOutlinedIcon />,
+        source: <AttachMoneyIcon />,
       },
     },
     {
@@ -107,43 +101,43 @@ export const Dashboard = () => {
   ];
 
   return (
-      <Box
-        padding="20px"
-        gap={2}
-        display="flex"
-        flexDirection="column"
-        width="95%"
-      >
-        <Box display="flex" justifyContent="space-between">
-          <Typography fontWeight="700" fontSize="24px">
-            Dashboard
-          </Typography>
-          <ManageBox>
-            <SettingsOutlinedIcon />
-            <Typography>Manage</Typography>
-          </ManageBox>
-        </Box>
-        <Box display="flex" gap={4}>
-          {card.map((item) => {
-            console.log(item.image);
-            return (
-              <Card
-                number={item.number}
-                title={item.title}
-                percentage={item.percentage}
-                icon={item.icon}
-                image={item.image}
-              />
-            );
-          })}
-        </Box>
-        <Box>
-          <ChartSection />
-        </Box>
-        <Box>
-          <TableSection />
-        </Box>
+    <Box
+      padding="20px"
+      gap={2}
+      display="flex"
+      flexDirection="column"
+      width="95%"
+    >
+      <Box display="flex" justifyContent="space-between">
+        <Typography fontWeight="700" fontSize="24px">
+          Dashboard
+        </Typography>
+        <ManageBox>
+          <SettingsOutlinedIcon />
+          <Typography>Manage</Typography>
+        </ManageBox>
       </Box>
+      <Box display="flex" gap={4}>
+        {card.map((item) => {
+          console.log(item.image);
+          return (
+            <Card
+              number={item.number}
+              title={item.title}
+              percentage={item.percentage}
+              icon={item.icon}
+              image={item.image}
+            />
+          );
+        })}
+      </Box>
+      <Box>
+        <ChartSection />
+      </Box>
+      <Box>
+        <TableSection />
+      </Box>
+    </Box>
   );
 };
 
@@ -178,14 +172,6 @@ const Card: React.FC<cardProp> = ({
         ) : (
           <IconBox>{image.source}</IconBox>
         )}
-        {/* <IconBox>
-            <ShoppingCartOutlinedIcon
-              sx={{
-                height: "12px",
-                width: "12px",
-              }}
-            />
-          </IconBox> */}
       </Box>
     </CardBox>
   );
@@ -244,17 +230,24 @@ const ChartSection = () => {
         label: "My First Dataset",
         data: [20, 30, 45, 32, 56, 51, 25, 20, 59, 69],
         backgroundColor: "#1FD286",
+        borderRadius: 50,
+        borderSkipped: false,
       },
     ],
   };
   const baarChatOptions = {
-    elements: {
-      bar: {
-        borderRadius: 50,
-        // borderWidth: 0.0003
-        width: "10px",
+    barThickness: 10,
+
+    scales: {
+      x: {
+        display: true,
+      },
+      y: {
+        display: false,
       },
     },
+    responsive: true,
+    maintainAspectRatio: false,
   };
 
   return (
@@ -321,14 +314,7 @@ const ChartSection = () => {
               </Box>
             </BaarChartHeader>
             <BarChartSection>
-              <Bar
-                data={barChartData}
-                options={baarChatOptions}
-                style={{
-                  height: "194px",
-                  width: "196px",
-                }}
-              />
+              <Bar data={barChartData} options={baarChatOptions} />
             </BarChartSection>
           </BaarChartBox>
         </Grid2>
@@ -338,15 +324,27 @@ const ChartSection = () => {
 };
 
 const TableSection = () => {
-  const row = ["Name", "Date", "Amount", "Status"];
-  const column = [
+  const column: GridColDef[] = [
+    { field: "name", headerName: "Name", width: 130 },
+    { field: "date", headerName: "Date", width: 130 },
+    { field: "amount", headerName: "Amount", width: 130 },
     {
+      field: "status",
+      headerName: "Status",
+      width: 130,
+      renderCell: (param) => <Button>{param.value}</Button>,
+    },
+  ];
+  const row = [
+    {
+      id: 1,
       name: "sakshi",
       date: "23/4/23",
       amount: 56,
       status: "pending",
     },
     {
+      id: 2,
       name: "sakshi",
       date: "23/4/23",
       amount: 56,
@@ -354,17 +352,33 @@ const TableSection = () => {
     },
   ];
 
-  const row1 = ["Name", "Price", "Units Sold"];
-  const column1 = [
+  const column1: GridColDef[] = [
     {
+      field: "image",
+      headerName: "Name",
+      width: 70,
+      renderCell: (params) => (
+        <img src={params.value} style={{ height: "36px", width: "36px" }} />
+      ),
+    },
+    { field: "name", headerName: "", width: 200 },
+    { field: "price", headerName: "Price", width: 100 },
+    { field: "unitsold", headerName: "Unit Sold", width: 100 },
+  ];
+  const row1 = [
+    {
+      id: 1,
       name: "sakshi",
       price: 45,
       unitsold: 200,
+      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     },
     {
+      id: 2,
       name: "sakshi",
       price: 45,
       unitsold: 200,
+      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     },
   ];
 
@@ -372,19 +386,31 @@ const TableSection = () => {
     <>
       <Grid2 container display="flex" spacing={4}>
         <Grid2 size={{ lg: 6 }} width="540px">
-          <TableComponent
-            row={row}
-            column={column}
-            header={"Recent Transaction"}
-          />
+          <TableBox>
+            <Typography fontWeight="700" fontSize="16px">
+              Recent Transaction
+            </Typography>
+            <DataGrid
+              rows={row}
+              columns={column}
+              pageSizeOptions={[5, 10]}
+              sx={{ border: 0 }}
+            />
+          </TableBox>
         </Grid2>
 
         <Grid2 size={{ lg: 6 }} width="540px">
-          <TableComponent
-            row={row1}
-            column={column}
-            header={"Top Products by Units Sold"}
-          />
+          <TableBox>
+            <Typography fontWeight="700" fontSize="16px">
+              Top Products by Units Sold
+            </Typography>
+            <DataGrid
+              rows={row1}
+              columns={column1}
+              pageSizeOptions={[5, 10]}
+              sx={{ border: 0 }}
+            />
+          </TableBox>
         </Grid2>
       </Grid2>
     </>

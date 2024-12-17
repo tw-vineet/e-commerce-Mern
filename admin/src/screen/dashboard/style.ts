@@ -41,7 +41,6 @@ export const BaarChartBox = styled(Box)({
   borderRadius: "6px",
   backgroundColor: "#FFFFFF",
   boxShadow: "0px 1px 4px 0px rgba(21, 34, 50, 0.08)",
-  // padding: "28px",
   padding: "15px 28px 15px 28px",
 });
 
@@ -83,3 +82,14 @@ export const BarChartSection = styled(Box)({
   alignItems:"center",
   height:"200px"
 })
+
+export const TableBox = styled(Box)(( {theme})=>({   
+  height: "396px",
+  width: "540px",
+  border: "1px solid #E6E9F4",
+  borderRadius: "6px",
+  padding:"30px",
+  display:"flex",
+  flexDirection:"column",
+  gap:10
+}))
