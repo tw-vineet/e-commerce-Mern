@@ -7,8 +7,10 @@ const Router = express.Router();
 const { adminController } = controllers;
 
 //Routes
+Router.post("/user-list", verifyTokenAndAdmin, adminController.userList);
+Router.post("/delete-user", verifyTokenAndAdmin, adminController.deleteUser);
 Router.post("/add-category", verifyTokenAndAdmin, categoryValidation, adminController.addCategory);
-Router.post("/category-list", verifyTokenAndAdmin, categoryValidation, adminController.categoryList);
+Router.post("/category-list", verifyTokenAndAdmin, adminController.categoryList);
 
 const adminRouter = Router;
 export { adminRouter };

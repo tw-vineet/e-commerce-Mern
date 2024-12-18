@@ -9,7 +9,9 @@ const MONGO_URI: string = process.env.MONGO_URI || "localhost";
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(MONGO_URI, {
+            autoIndex: true
+        });
         logger.info(DATABASE_CONNECTED);
 
     } catch (error) {

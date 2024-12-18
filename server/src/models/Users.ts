@@ -41,11 +41,20 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    isDeActivated: {
+        type: Boolean,
+        default: false
+    },
 
 }, { timestamps: true });
 
 const User = mongoose.model("user", userSchema);
 export default User;
+
 
 //services
 export const createUser = async (data: Record<string, string>, next: NextFunction) => {

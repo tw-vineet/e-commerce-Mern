@@ -2,10 +2,18 @@ import mongoose from "mongoose";
 const categorySchema = new mongoose.Schema({
     categoryName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     categoryCode: {
         type: String,
+        required: true,
+        unique: true
+    },
+    categoryIcon: {
+        type: String,
+        required: true,
+        default: ""
     },
 
 }, { timestamps: true });

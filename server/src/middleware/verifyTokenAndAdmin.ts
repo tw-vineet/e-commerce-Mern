@@ -6,14 +6,19 @@ import { messages } from "../helper/utils/messages.js";
 const { UNAUTHORIZED_ACCESS } = messages;
 export const verifyTokenAndAdmin = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await verifyToken(req, res, () => { });
+        await new Promise<void>((resolve, reject) => {
+            verifyToken(req, res, (err) => {
+                if (err) return reject(err);
+                resolve();
+            });
+        });
+
         const { isAdmin } = req.user;
-        if (isAdmin) {
-            next();
-        } else {
-            next(new UnAuthorizedError(UNAUTHORIZED_ACCESS))
+        if (!isAdmin) {
+            return next(new UnAuthorizedError(UNAUTHORIZED_ACCESS))
         }
+        next();
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
