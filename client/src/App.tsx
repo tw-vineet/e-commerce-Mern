@@ -1,13 +1,14 @@
 import React from "react";
-import Navbar from "./Layout/Navbar";
-import Footer from "./Layout/Footer";
+import Login from "./Layout/Login";
+import { Sign } from "crypto";
+import Signup from "./Layout/Signup";
+
 
 
 export default function App() {
-  return (<>
-
-    <Navbar />
-    <Footer />
-  </>
+  return (
+    <>
+      <Signup />
+    </>
   );
 }
