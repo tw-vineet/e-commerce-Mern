@@ -1,10 +1,10 @@
-import { Box, Grid2, Typography } from "@mui/material";
+import { Avatar, Box, Grid2, Typography } from "@mui/material";
 import logo from "../../asset/images/logo.png";
 import React from "react";
 import MessageIcon from "@mui/icons-material/Message";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { MuiBox ,ProfileBox} from "./style";
+import { MuiBox} from "./style";
 
 export const Header = () => {
   return (
@@ -23,9 +23,7 @@ export const Header = () => {
               <NotificationsNoneIcon />
             </Grid2>
             <Grid2  color="white">
-              <ProfileBox>
-                R
-              </ProfileBox>
+              <Avatar sx={{backgroundColor:"#1FD286"}}>R</Avatar>
             </Grid2>
             <Grid2  color="white">
               <Box display={"flex"} gap={1}>

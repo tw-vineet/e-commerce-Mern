@@ -384,7 +384,7 @@ const TableSection = () => {
 
   return (
     <>
-      <Grid2 container display="flex" spacing={4}>
+      <Grid2 container display="flex" spacing={5}>
         <Grid2 size={{ lg: 6 }} width="540px">
           <TableBox>
             <Typography fontWeight="700" fontSize="16px">

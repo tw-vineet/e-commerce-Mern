@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
 import styled from "styled-components";
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from "@mui/material/colors";
 
 export const MuiBox = styled(Box)({
   backgroundColor: "#070B1D",
@@ -7,10 +9,7 @@ export const MuiBox = styled(Box)({
   height: "68px",
   display: "flex",
   justifyContent: "space-between",
-  // position:"fixed",
-  // zIndex:1,
-
-});
+ });
 
 export const ProfileBox = styled(Box)({
   height: "36px",
@@ -22,3 +21,7 @@ export const ProfileBox = styled(Box)({
   fontWeight: "bold",
   backgroundColor: "#1FD286"
 });
+
+export const AvatarBox = styled(Avatar)({
+   backgroundColor: "#1FD286"
+})
