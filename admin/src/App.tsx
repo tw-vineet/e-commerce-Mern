@@ -1,6 +1,8 @@
 import { Header, SideBar } from "./layout";
 import { Box,} from "@mui/material";
-import { Dashboard } from "./screen";
+import { Category, Dashboard, Orders, Products  } from "./screen";
+
+
 
 function App() {
   return (
@@ -9,7 +11,10 @@ function App() {
       <Box display="flex">
         <SideBar />
         <Box width="100%" height="100vh" overflow="auto">
-          <Dashboard />
+          {/* <Dashboard /> */}
+          {/* <Orders/> */}
+        {/* <Products/> */}
+        <Category/>
         </Box>
       </Box>
     </>

@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import styled from "styled-components";
 
 export const SidebarBox = styled(Box)(( {theme})=>({   
-  backgroundColor: `${theme.palette.primary.main}`,
+  backgroundColor: `${theme.palette.secondary.main}`,
   height: "100vh",
   width: "20%",
   display: "flex",
