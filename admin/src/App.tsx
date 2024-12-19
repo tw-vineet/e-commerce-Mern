@@ -1,6 +1,7 @@
 import { Header, SideBar } from "./layout";
 import { Box,} from "@mui/material";
 import { Category, Dashboard, Orders, Products  } from "./screen";
+import { Routing } from "./routes/Routing";
 
 
 
@@ -14,7 +15,8 @@ function App() {
           {/* <Dashboard /> */}
           {/* <Orders/> */}
         {/* <Products/> */}
-        <Category/>
+        {/* <Category/> */}
+        <Routing/>
         </Box>
       </Box>
     </>

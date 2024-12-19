@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,14 +15,16 @@ const theme = createTheme({
     primary: {
       main: "#FFF6F4",
     },
-    secondary :{
-      main : "#1E2753"
-    }
+    secondary: {
+      main: "#1E2753",
+    },
   },
 });
 
 root.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </ThemeProvider>
 );
