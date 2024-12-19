@@ -6,7 +6,7 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
-import { SidebarBox, DashboardBox, PageBox } from "./style";
+import { SidebarBox, DashboardBox, PageBox, NavLinkStyle } from "./style";
 import { Link, NavLink } from "react-router-dom";
 import React from "react";
 
@@ -75,11 +75,12 @@ export const SideBar = () => {
                       display: "flex",
                       alignItems: "center",
                       padding: "0px 10px 0px 10px",
-                      color: "#5A607F",
+                      color: "black",
                       gap: 20,
                       borderRadius: "4px",
+                      textDecoration:"none"
                     }
-                  : {};
+                  : {textDecoration:"none"};
               }}
             >
               <PageBox>
