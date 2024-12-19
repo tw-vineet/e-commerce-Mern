@@ -2,16 +2,24 @@ import { Request, Response, NextFunction } from "express";
 import User, { createUser, getUserDetailsByEmail } from "../models/Users.js";
 import { getDecryptedPassword, getEncryptedPassword } from "../helper/services/crypto.js";
 import { string } from "joi";
-import { NotFoundError, UnAuthorizedError } from "../middleware/errorHandler.js";
+import { AlreadyExistError, NotFoundError, UnAuthorizedError, ValidationError } from "../middleware/errorHandler.js";
 import { generateJwtToken } from "../helper/services/jwtToken.js";
 import { jwtCredential } from "../DataTypes/dataTypes.js";
 import { messages } from "../helper/utils/messages.js";
 
-const { USER_REGISTERED, USER_NOT_FOUND, INCORRECT_PASSWORD, LOGIN_SUCCESS } = messages;
-
+const { USER_REGISTERED, USER_NOT_FOUND, INCORRECT_PASSWORD, LOGIN_SUCCESS, USER_WITH_EMAIL_EXIST } = messages;
 const signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { password } = req.body;
+        const { email, password } = req.body;
+
+        const userDetails = await getUserDetailsByEmail(email, next);
+        if (userDetails) {
+            const error = {
+                email: USER_WITH_EMAIL_EXIST
+            }
+            return next(new ValidationError(error))
+        }
+
         const encryptedPassword = await getEncryptedPassword(password, next);
         const values = {
             ...req.body,

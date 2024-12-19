@@ -10,7 +10,6 @@ const { ACCESS_TOKEN_REQUIRED, JWT_NOT_CONGIGURED, INVALID_ACCESS_TOKEN, TOKEN_E
     SOMETHING_WRONG_WITH_TOKEN } = messages
 export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { userId } = req.body;
         const headers = req.headers.authorization;
         if (!headers) {
             return next(new NotFoundError(ACCESS_TOKEN_REQUIRED))
@@ -36,6 +35,7 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
                     return next(new UnAuthorizedError(SOMETHING_WRONG_WITH_TOKEN))
                 }
             };
+
             req.user = data as jwtCredential;
             next();
         })

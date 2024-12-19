@@ -1,0 +1,7 @@
+export * from "./dashboard"
+export * from "./orders"
+export * from "./products"
+export * from "./category"
+export * from "./customers"
+export * from "./inbox"
+export * from "./reports"

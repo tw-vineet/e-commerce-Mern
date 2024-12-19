@@ -47,3 +47,22 @@ type updateUserObject = {
 }
 
 export type dynamicObject = signupObject | updateUserObject
+
+export interface ExtendedError extends Error {
+    code: number;
+    keyPattern: Record<string, string>;
+    keyValue: Record<string, string>;
+    errorResponse: Record<string, string>;
+}
+
+export interface errorResponse {
+    status: boolean,
+    statusCode: number,
+    message: string,
+    data: arrayObject
+}
+
+export interface CategoryDuplicateErrors {
+    categoryCode?: string;
+    categoryName?: string;
+}

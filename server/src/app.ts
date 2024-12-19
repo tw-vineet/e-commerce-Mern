@@ -1,9 +1,9 @@
 import express from 'express';
+import url from 'url'
 import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import connectDB from './config/db/database.js';
-import { authRouter } from './routes/authRouter.js';
 import bodyParser from 'body-parser';
 import { Routes } from './routes/index.js';
 
@@ -27,14 +27,13 @@ app.use(fileUpload({
 }));
 
 //routes
-app.use("/api", Routes)
+app.use("/api", Routes);
 app.use("*", (req, res, next) => {
     next(new NotFoundError(INVALID_REQUESTED_URL))
 });
 
 //Error handler middleware
 app.use(errorHandler);
-
 app.listen(process.env.PORT, () => {
     connectDB();
     logger.info(`${SERVER_RUNNING_AT}: http://localhost:${process.env.PORT}`)

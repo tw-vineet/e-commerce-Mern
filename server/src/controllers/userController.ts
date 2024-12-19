@@ -3,8 +3,7 @@ import User, { getUserDetails, updateUser } from "../models/Users.js";
 import { uploadImageToCloudinary } from "../helper/utils/imageUpload.js";
 import { UploadedImage } from "../DataTypes/dataTypes.js";
 import { NotFoundError } from "../middleware/errorHandler.js";
-import mongoose from "mongoose";
-import { string } from "joi";
+
 import { getDecryptedPassword, getEncryptedPassword } from "../helper/services/crypto.js";
 import { messages } from "../helper/utils/messages.js";
 
@@ -72,41 +71,7 @@ const updateUserDetails = async (req: Request, res: Response, next: NextFunction
     }
 };
 
-const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const { userIds }: { userIds: string[] } = req.body
-        const objectIds = userIds.map((id: string) => new mongoose.Types.ObjectId(id));
-
-        const response = await User.deleteMany({ _id: { $in: objectIds } });
-        res.status(200).json({
-            status: true,
-            statusCode: 200,
-            message: USER_DELETED,
-        });
-
-    } catch (error) {
-        next(error)
-    }
-}
-
-const userList = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-
-        const allUserList = await User.find({ isAdmin: false });
-        res.status(200).json({
-            status: true,
-            statusCode: 200,
-            data: allUserList,
-            message: USER_DETAILS,
-        });
-    } catch (error) {
-        next(error)
-    }
-};
-
 export const userController = {
     userDetails,
     updateUserDetails,
-    deleteUser,
-    userList
 }
