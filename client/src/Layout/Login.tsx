@@ -21,12 +21,11 @@ const Boxinputfield = styled(Box)(() => ({
   margin: "45px 0px 22px 0px;",
 }))
 
-
 const buttonCss: IButtonStyle = {
   width: "100px",
   background: "#DB4444",
 
-  borderRadius: "2px"
+  borderRadius: "2px",
 }
 
 export default function Login() {
