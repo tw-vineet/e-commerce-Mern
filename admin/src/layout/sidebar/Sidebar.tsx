@@ -41,17 +41,17 @@ export const SideBar = () => {
     {
       name: "Customers",
       icon: <PeopleAltOutlinedIcon />,
-      path: "",
+      path: "/customers",
     },
     {
       name: "Reports",
       icon: <BarChartOutlinedIcon />,
-      path: "",
+      path: "/reports",
     },
     {
       name: "Inbox",
       icon: <MessageOutlinedIcon />,
-      path: "",
+      path: "/inbox",
     },
   ];
 
