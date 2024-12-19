@@ -27,6 +27,7 @@ const theme = createTheme({
 root.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
+
       <App />
     </ThemeProvider>
   </BrowserRouter>

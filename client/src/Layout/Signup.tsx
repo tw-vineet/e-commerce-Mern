@@ -8,6 +8,7 @@ import Footer from "../Layout/Footer"
 import { IButtonStyle } from "../Dto/dataType";
 // @ts-ignore
 import LoginImage from "../image/login.png"
+import { NavLink } from "react-router-dom";
 
 
 
@@ -119,7 +120,7 @@ export default function Signup() {
 
                 <Box textAlign={"center"} >
                   <Typography component="span">
-                    Already have account? <Link>Log In</Link>
+                    Already have account? <NavLink to={"/Login"}>Log In</NavLink>
                   </Typography>
                 </Box>
 

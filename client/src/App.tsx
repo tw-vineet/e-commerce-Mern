@@ -1,14 +1,14 @@
 import React from "react";
-import Login from "./Layout/Login";
-import { Sign } from "crypto";
-import Signup from "./Layout/Signup";
+
+import { Routing } from "./routes/routing";
+
 
 
 
 export default function App() {
   return (
     <>
-      <Signup />
+      <Routing />
     </>
   );
 }
