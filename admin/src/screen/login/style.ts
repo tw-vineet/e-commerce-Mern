@@ -34,7 +34,7 @@ export const InputStyle = styled(Input)({
 export const FormBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
+  alignItems:"center",
   gap: "20px",
 });
 

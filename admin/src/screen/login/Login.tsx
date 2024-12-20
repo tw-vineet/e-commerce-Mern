@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Checkbox, Divider, Typography } from "@mui/material";
 import {
   InputStyle,
   LoginBox,
@@ -29,6 +29,7 @@ export const Login = () => {
         </Box>
 
         <FormBox>
+          
           <Box>
             <Typography
               fontWeight="400"
@@ -52,7 +53,11 @@ export const Login = () => {
             </Typography>
             <InputStyle placeholder="Create Password" />
           </Box>
-
+        
+          <Box display="flex"  alignItems="center" width="430px">
+          <Checkbox    />
+          <Typography fontWeight="400" fontSize="14px" color="#5A607F">Keep me signed in</Typography>
+          </Box>
           <CreateButton variant="contained">Login Account</CreateButton>
         </FormBox>
         <Box textAlign="center">
