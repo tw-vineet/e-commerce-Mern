@@ -1,4 +1,6 @@
 import { Box, Button, Grid2, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector  } from "react-redux";
 import {
   CardBox,
   IconBox,
@@ -34,6 +36,8 @@ import { Line, Bar } from "react-chartjs-2";
 
 import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { productData } from "../../services/productServices/productServices";
+import { AppDispatch, RootState, useAppDispatch, useAppSelector } from "../../redux/store";
 
 type cardProp = {
   number: string;
@@ -45,8 +49,22 @@ type cardProp = {
     source: string | React.ReactNode;
   };
 };
+ 
+type stateType = {
+  data:[],
+  loading:boolean,
+  error : null | string 
+}
 
 export const Dashboard = () => {
+
+  const dispath = useAppDispatch();
+  const { data: product, loading, error } = useAppSelector((state) => state.product);
+
+  useEffect(()=>{
+    dispath(productData())
+  },[])
+
   const card = [
     {
       number: "3456",
