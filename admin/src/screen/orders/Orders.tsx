@@ -8,8 +8,11 @@ import {
   PaidButton,
   ReadyButton,
   ShippedButton,
+  EditDeleteBox,
+  OrderTable,
+  ExportButton,
 } from "./style";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {GridColDef } from "@mui/x-data-grid";
 
 export const Orders = () => {
   return (
@@ -20,15 +23,7 @@ export const Orders = () => {
             Orders
           </Typography>
           <Box display="flex" gap={2}>
-            <Button
-              variant="outlined"
-              style={{
-                border: "1px solid #D7DBEC",
-                backgroundColor: "#FFFFFF",
-              }}
-            >
-              Export
-            </Button>
+            <ExportButton>Export</ExportButton>
             <Button variant="contained">+ Add Order</Button>
           </Box>
         </Box>
@@ -93,47 +88,21 @@ const TableSection = () => {
       <TableBox>
         <Box display="flex" justifyContent="space-between">
           <Box>
-            <TextField
-              select
-              defaultValue="EUR"
-              size="small"
-              slotProps={{}}
-            ></TextField>
+            <TextField select defaultValue="EUR" size="small"></TextField>
           </Box>
           <Box display="flex" gap={2}>
-            <Box
-              height="40px"
-              width="40px"
-              border="1px solid #D7DBEC"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              color="#1E5EFF"
-              bgcolor="white"
-              borderRadius="4px"
-            >
+            <EditDeleteBox>
               <BorderColorIcon />
-            </Box>
-            <Box
-              height="40px"
-              width="40px"
-              border="1px solid #D7DBEC"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              color="#1E5EFF"
-              bgcolor="white"
-              borderRadius="4px"
-            >
+            </EditDeleteBox>
+            <EditDeleteBox>
               <DeleteIcon />
-            </Box>
+            </EditDeleteBox>
           </Box>
         </Box>
-        <DataGrid
+        <OrderTable
           rows={row}
           columns={column}
           pageSizeOptions={[5, 10]}
-          sx={{ border: 0 }}
           checkboxSelection
         />
       </TableBox>

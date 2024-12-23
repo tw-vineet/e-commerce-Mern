@@ -33,7 +33,8 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 
 import React from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
+import { DashboarBox, DashboardTable } from "../category/style";
 
 type cardProp = {
   number: string;
@@ -101,13 +102,7 @@ export const Dashboard = () => {
   ];
 
   return (
-    <Box
-      padding="20px"
-      gap={2}
-      display="flex"
-      flexDirection="column"
-      width="95%"
-    >
+    <DashboarBox>
       <Box display="flex" justifyContent="space-between">
         <Typography fontWeight="700" fontSize="24px">
           Dashboard
@@ -119,7 +114,6 @@ export const Dashboard = () => {
       </Box>
       <Box display="flex" gap={4}>
         {card.map((item) => {
-          console.log(item.image);
           return (
             <Card
               number={item.number}
@@ -137,7 +131,7 @@ export const Dashboard = () => {
       <Box>
         <TableSection />
       </Box>
-    </Box>
+    </DashboarBox>
   );
 };
 
@@ -390,11 +384,10 @@ const TableSection = () => {
             <Typography fontWeight="700" fontSize="16px">
               Recent Transaction
             </Typography>
-            <DataGrid
+            <DashboardTable
               rows={row}
               columns={column}
               pageSizeOptions={[5, 10]}
-              sx={{ border: 0 }}
             />
           </TableBox>
         </Grid2>
@@ -404,11 +397,10 @@ const TableSection = () => {
             <Typography fontWeight="700" fontSize="16px">
               Top Products by Units Sold
             </Typography>
-            <DataGrid
+            <DashboardTable
               rows={row1}
               columns={column1}
               pageSizeOptions={[5, 10]}
-              sx={{ border: 0 }}
             />
           </TableBox>
         </Grid2>

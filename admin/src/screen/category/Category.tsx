@@ -1,12 +1,10 @@
 import React from "react";
-import { CategoryBox } from "./style";
+import { CardBox, CategoryBox } from "./style";
 import {
   Box,
   Button,
-  Card,
   CardActionArea,
   CardContent,
-  CardMedia,
   Grid2,
   Typography,
 } from "@mui/material";
@@ -14,7 +12,8 @@ import {
 export const Category = () => {
   const category = [
     {
-      image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+      image:
+        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
       title: "Men Clothes",
       items: "12 item",
     },
@@ -29,17 +28,20 @@ export const Category = () => {
       items: "12 item",
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQas-Oxi-GF8xWMQ7g8MGmNvCxFLevtKZAA&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQas-Oxi-GF8xWMQ7g8MGmNvCxFLevtKZAA&s",
       title: "Cotton Clothes",
       items: "12 item",
     },
     {
-      image: "https://www.kidbea.com/cdn/shop/articles/portrait-happy-girl-outdoors-summer-day.jpg?v=1679038182",
+      image:
+        "https://www.kidbea.com/cdn/shop/articles/portrait-happy-girl-outdoors-summer-day.jpg?v=1679038182",
       title: "Summer Clothes",
       items: "12 item",
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWtuEAePpAzLz-PEcGlhNBAdZBBq8VYPTzXg&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWtuEAePpAzLz-PEcGlhNBAdZBBq8VYPTzXg&s",
       title: "Wedding Clothes",
       items: "12 item",
     },
@@ -54,7 +56,8 @@ export const Category = () => {
       items: "12 item",
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnkac7SKpqdH-xN5upqw9yrJ32odxLCIhK8g&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnkac7SKpqdH-xN5upqw9yrJ32odxLCIhK8g&s",
       title: "Hats",
       items: "12 item",
     },
@@ -72,7 +75,7 @@ export const Category = () => {
           {category.map((item) => {
             return (
               <Grid2 size={{ lg: 4 }}>
-                <Card sx={{ width: "350px", height: "324px" }}>
+                <CardBox>
                   <CardActionArea>
                     <img
                       src={item.image}
@@ -99,7 +102,7 @@ export const Category = () => {
                       </Typography>
                     </CardContent>
                   </CardActionArea>
-                </Card>
+                </CardBox>
               </Grid2>
             );
           })}
