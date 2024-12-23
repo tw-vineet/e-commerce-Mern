@@ -1,6 +1,7 @@
 import { Box, Grid2 } from "@mui/material";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { DataGrid } from "@mui/x-data-grid";
 
 export const CardBox = styled(Box)(({ theme }) => ({
   height: "70px",

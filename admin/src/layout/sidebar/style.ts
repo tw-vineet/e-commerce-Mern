@@ -10,18 +10,7 @@ export const SidebarBox = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   padding: "10px",
   alignItems: "center",
-  // gap:"10px"
 }));
-
-export const DashboardBox = styled(Box)({
-  height: "44px",
-  width: "223px",
-  backgroundColor: "white",
-  display: "flex",
-  alignItems: "center",
-  padding: "0px 10px 0px 10px",
-  gap: 20,
-});
 
 export const PageBox = styled(Box)({
   height: "44px",
@@ -33,20 +22,3 @@ export const PageBox = styled(Box)({
   gap: 20,
   borderRadius: "4px",
 });
-
-export const NavLinkStyle = styled(NavLink)(({theme})=>({
-  height: "44px",
-  width: "223px",
-  display: "flex",
-  alignItems: "center",
-  padding: "0px 10px 0px 10px",
-  color: "#5A607F",
-  gap: 20,
-  borderRadius: "4px",
-  "&:active ": {
-    backgroundColor:"white",
-    color:"black"
-  },
-}));
- 
-

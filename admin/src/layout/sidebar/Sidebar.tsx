@@ -6,9 +6,9 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
-import { SidebarBox, DashboardBox, PageBox, NavLinkStyle } from "./style";
-import { Link, NavLink } from "react-router-dom";
-import React from "react";
+import { SidebarBox, PageBox } from "./style";
+import {NavLink } from "react-router-dom";
+import React, { useState } from "react";
 
 type pagesTypes = {
   name: string;
@@ -17,10 +17,11 @@ type pagesTypes = {
 };
 
 export const SideBar = () => {
+  const [isScreen, setIsScreen] = useState(0);
   const pages: pagesTypes[] = [
     {
       name: "Dashboard",
-      icon: <FormatListBulletedIcon />,
+      icon: <HomeOutlinedIcon />,
       path: "/",
     },
     {
@@ -58,15 +59,11 @@ export const SideBar = () => {
   return (
     <>
       <SidebarBox>
-        {/* <DashboardBox>
-          <HomeOutlinedIcon sx={{ color: "#5A607F" }} />
-          <Typography color="#5A607F">Dashboard</Typography>
-        </DashboardBox> */}
-        {pages.map((item) => {
+        {pages.map((item, index) => {
           return (
             <NavLink
               to={item.path}
-              style={({ isActive }) => {
+              style={({ isActive }: { isActive: boolean }) => {
                 return isActive
                   ? {
                       height: "44px",
@@ -75,17 +72,31 @@ export const SideBar = () => {
                       display: "flex",
                       alignItems: "center",
                       padding: "0px 10px 0px 10px",
-                      color: "black",
                       gap: 20,
                       borderRadius: "4px",
-                      textDecoration:"none"
+                      textDecoration: "none",
                     }
-                  : {textDecoration:"none"};
+                  : { textDecoration: "none" };
+              }}
+              onClick={() => {
+                setIsScreen(index);
               }}
             >
               <PageBox>
-                <Box height="24px"> {item.icon}</Box>
-                <Typography fontWeight={400} fontSize="14px">
+                <Box
+                  key={index}
+                  height="24px"
+                  color={isScreen == index ? "#5A607F" : "white"}
+                >
+                  {" "}
+                  {item.icon}
+                </Box>
+                <Typography
+                  key={index}
+                  fontWeight="400"
+                  fontSize="14px"
+                  color={isScreen == index ? "#5A607F" : "white"}
+                >
                   {item.name}
                 </Typography>
               </PageBox>
