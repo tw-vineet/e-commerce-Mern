@@ -9,7 +9,8 @@ function App() {
       <Box display="flex">
         <SideBar />
         <Box width="100%" height="100vh" overflow="auto">
-          <Dashboard />
+          {/* <Dashboard /> */}
+          <Login/>
         </Box>
       </Box>
      

@@ -1,4 +1,4 @@
-import { Box, Button, Input } from "@mui/material";
+import { Box, Button, Input, Typography } from "@mui/material";
 import styled from "styled-components";
 
 export const LoginBoxArea = styled(Box)({
@@ -17,9 +17,9 @@ export const LoginBox = styled(Box)({
   boxShadow: "0px 1px 4px 0px rgba(21, 34, 50, 0.08)",
   backgroundColor: "#FFFFFF",
   padding: "30px",
-  display:"flex",
-  flexDirection:"column",
-  gap:"20px"
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
 });
 
 export const InputStyle = styled(Input)({
@@ -34,7 +34,7 @@ export const InputStyle = styled(Input)({
 export const FormBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  alignItems:"center",
+  alignItems: "center",
   gap: "20px",
 });
 
@@ -60,8 +60,15 @@ export const DirctLoginBox = styled(Box)({
 });
 
 export const GoogleFbBox = styled(Box)({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap:10
-})
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 10,
+});
+
+export const LabelText = styled(Typography)({
+  fontWeight: "400",
+  fontSize: "14px",
+  color: "#5A607F",
+  marginBottom: "3px",
+});

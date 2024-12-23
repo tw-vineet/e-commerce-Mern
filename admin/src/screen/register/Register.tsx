@@ -7,6 +7,7 @@ import {
   CreateButton,
   DirctRegisterBox,
   GoogleFbBox,
+  LabelText,
 } from "./style";
 import Facebook from "../../asset/images/login/Facebook.png";
 import Google from "../../asset/images/login/Google.png";
@@ -30,26 +31,16 @@ export const Register = () => {
 
         <FormBox>
           <Box>
-            <Typography
-              fontWeight="400"
-              fontSize="14px"
-              color="#5A607F"
-              marginBottom="3px"
-            >
+            <LabelText>
               Email
-            </Typography>
+            </LabelText>
             <InputStyle placeholder="Enter Email Address" />
           </Box>
 
           <Box>
-            <Typography
-              fontWeight="400"
-              fontSize="14px"
-              color="#5A607F"
-              marginBottom="3px"
-            >
+            <LabelText>
               Password
-            </Typography>
+            </LabelText>
             <InputStyle placeholder="Create Password" />
           </Box>
 

@@ -1,4 +1,4 @@
-import { Box, Button, Input } from "@mui/material";
+import { Box, Button, Input, Typography } from "@mui/material";
 import styled from "styled-components";
 
 export const RegisterBoxArea = styled(Box)({
@@ -65,3 +65,10 @@ export const GoogleFbBox = styled(Box)({
     alignItems: "center",
     gap:10
 })
+
+export const LabelText = styled(Typography)({
+  fontWeight: "400",
+  fontSize: "14px",
+  color: "#5A607F",
+  marginBottom: "3px",
+});
