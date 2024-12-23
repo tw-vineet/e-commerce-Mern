@@ -4,7 +4,7 @@ import { productData } from "../../services/productServices/productServices";
 type productStateType = {
     data : [],
     loading : boolean,
-    error : null | string | unknown
+    error :  string | undefined | null
 }
 
 const initialState : productStateType =  {data:[],loading:false,error:null} 
@@ -19,7 +19,6 @@ const productSlice = createSlice({
         }).addCase(productData.fulfilled,(state,action)=>{
             state.loading=false
             state.data=action.payload
-            console.log("action",action.payload)
         })
         .addCase(productData.rejected,(state,action)=>{
             state.loading=false

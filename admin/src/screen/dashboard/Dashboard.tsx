@@ -137,7 +137,6 @@ export const Dashboard = () => {
       </Box>
       <Box display="flex" gap={4}>
         {card.map((item) => {
-          console.log(item.image);
           return (
             <Card
               number={item.number}
