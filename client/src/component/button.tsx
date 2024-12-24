@@ -1,5 +1,6 @@
-import { Button } from "@mui/material";
 import React from "react";
+import { Button } from "@mui/material";
+
 
 
 
@@ -13,7 +14,7 @@ interface IPropsButton {
     icon?: React.ReactNode
 }
 
-export default function Buttons({ text, variant1, styleProps, type, icon }: IPropsButton) {
+export function Buttons({ text, variant1, styleProps, type, icon }: IPropsButton) {
 
     // console.log(typeof variant)
     return <>

@@ -1,19 +1,16 @@
 import { TextField } from "@mui/material"
 
-
-
 interface IProps {
   type: string
   label: string
   styleProps?: any
   name: string
   variant?: "outlined" | "standard" | "filled"
-
 }
 
 
 
-export default function Input({
+export function Input({
   type,
   label,
   styleProps,

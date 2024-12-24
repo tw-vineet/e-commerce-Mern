@@ -13,7 +13,7 @@ interface ITitleProps {
 
 
 
-export default function Title({ headText, text }: ITitleProps) {
+export function Title({ headText, text }: ITitleProps) {
 
 
     return <>

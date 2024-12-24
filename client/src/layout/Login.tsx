@@ -1,13 +1,12 @@
 import React from "react"
 import { Box, Grid2, Typography } from "@mui/material"
 import styled from "styled-components"
-import Navbar from "../Layout/Navbar"
-import Input from "../component/Input"
-import Buttons from "../component/button"
-import Footer from "../Layout/Footer"
-import { IButtonStyle } from "../Dto/dataType"
+import { Buttons, Input } from "../component"
+import { Navbar } from "./Navbar"
+import { Footer } from "./Footer"
 // @ts-ignore
 import loginImage from "../image/login.png"
+import { IButtonStyle } from "../Dto/dataType"
 
 const ImgLogin = styled("img")(() => ({
   width: "622px",
@@ -21,15 +20,14 @@ const Boxinputfield = styled(Box)(() => ({
   margin: "45px 0px 22px 0px;",
 }))
 
-
 const buttonCss: IButtonStyle = {
   width: "100px",
   background: "#DB4444",
 
-  borderRadius: "2px"
+  borderRadius: "2px",
 }
 
-export default function Login() {
+export function Login() {
   return (
     <>
       <Navbar />

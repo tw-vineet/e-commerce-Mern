@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Grid2, Typography, Link } from "@mui/material"
 import styled from "styled-components"
-import Navbar from "../Layout/Navbar"
-import Input from "../component/Input"
-import Buttons from "../component/button"
-import Footer from "../Layout/Footer"
+
+import { NavLink } from "react-router-dom";
+import { Buttons, Input } from "../component";
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 import { IButtonStyle } from "../Dto/dataType";
 // @ts-ignore
 import LoginImage from "../image/login.png"
@@ -119,7 +120,7 @@ export default function Signup() {
 
                 <Box textAlign={"center"} >
                   <Typography component="span">
-                    Already have account? <Link>Log In</Link>
+                    Already have account? <NavLink to={"/Login"}>Log In</NavLink>
                   </Typography>
                 </Box>
 

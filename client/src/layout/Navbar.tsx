@@ -8,7 +8,10 @@ import AOS from "aos"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import SearchIcon from "@mui/icons-material/Search"
-import Input from "../component/Input"
+
+import { NavLink } from "react-router-dom"
+import { Input } from "../component"
+
 
 // Styling the Navbar text
 const NavbarText = styled(Typography)(({ theme }) => ({
@@ -18,48 +21,58 @@ const NavbarText = styled(Typography)(({ theme }) => ({
 
 const TopBar = styled(Box)(({ theme }) => ({
   backgroundColor: "black",
-
   display: "flex",
-
   justifyContent: "center",
-
   height: "44px",
+  fontFamily: "Poppins !important",
 }))
 
-const Navbartext = styled(Typography)(({ theme }) => ({
-  fontFamily: "Poppins",
-}))
+const Navbartext = styled(Typography)({
+  fontFamily: "Poppins !important",
+  paddingBottom: "5px",
+})
 
-const Bartext = styled(Grid2)(({ theme }) => ({
+const Bartext = styled(Grid2)({
   display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
-}))
+  fontFamily: "Poppins !important",
+})
 
-const Searchbar = styled(Grid2)(({ theme }) => ({
+const Searchbar = styled(Grid2)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-}))
+})
 
-const NavbarMain = styled(Box)(({ theme }) => ({
+const NavbarMain = styled(Box)({
   display: " flex",
   justifyContent: "center",
   alignItems: "center",
   marginTop: "30px",
-}))
+})
 
-const Searchicon = styled(SearchIcon)(({ theme }) => ({
+const Searchicon = styled(SearchIcon)({
   position: "relative",
   right: "27px",
-}))
+})
 
-const InputBox = styled(Box)(({ theme }) => ({
+const InputBox = styled(Box)({
   opacity: "50%",
   w: 4,
+})
+
+const WishlistIcon = styled(FavoriteIcon)({
+  marginRight: 2
+
+})
+const Navitgaion = styled(NavLink)((theme) => ({
+  fontFamily: "Poppins",
+  color: "black",
+  textDecoration: "none"
 }))
 
-export default function Navbar() {
+export function Navbar() {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -70,7 +83,7 @@ export default function Navbar() {
     <>
       <TopBar>
         <Toolbar>
-          <NavbarText>
+          <NavbarText marginBottom={2}>
             Summer Sale: All Swim Suits And Free Express Delivery - OFF 50%!
             Shop Now
           </NavbarText>
@@ -91,29 +104,25 @@ export default function Navbar() {
 
             <Bartext size={6}>
               <Box>
-                <Navbartext></Navbartext>
-                <Link color={"black"} href="#" underline="hover">
+
+                <Navitgaion to={"/"} >
                   Home
-                </Link>
+                </Navitgaion>
               </Box>
               <Box>
-                <Link color={"black"} href="#" underline="hover">
+                <Navitgaion to="/">
                   Contact
-                </Link>
+                </Navitgaion>
               </Box>
               <Box>
-                <Link color={"black"} href="#" underline="hover">
+                <Navitgaion to="/" >
                   About
-                </Link>
+                </Navitgaion>
               </Box>
               <Box>
-                <Link
-                  color={"black"}
-                  href="../../Screen/Signup.tsx"
-                  underline="hover"
-                >
+                <Navitgaion to={"/Signup"}  >
                   Sign Up
-                </Link>
+                </Navitgaion>
               </Box>
             </Bartext>
 
@@ -129,8 +138,10 @@ export default function Navbar() {
               </InputBox>
               <Searchicon />
               <Box display={"flex"}>
-                <FavoriteIcon />
-                <ShoppingCartIcon />
+                <Box marginRight={2}>
+                  <WishlistIcon />
+                </Box>
+                <NavLink to={"/Cart"} style={{ color: "black" }}> <ShoppingCartIcon /></NavLink>
               </Box>
             </Searchbar>
           </Grid2>

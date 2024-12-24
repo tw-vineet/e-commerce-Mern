@@ -1,14 +1,18 @@
-import React from "react";
-import Login from "./Layout/Login";
-import { Sign } from "crypto";
-import Signup from "./Layout/Signup";
+import React, { useEffect } from "react";
+
+import { Routing } from "./routes/routing";
+import { Billing } from "./screen/billing";
+
 
 
 
 export default function App() {
+
   return (
     <>
-      <Signup />
+
+
+      <Routing />
     </>
   );
 }

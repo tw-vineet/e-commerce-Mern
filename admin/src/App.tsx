@@ -1,5 +1,5 @@
 import { Header, SideBar } from "./layout";
-import { Box,} from "@mui/material";
+import { Box, } from "@mui/material";
 import { Dashboard } from "./screen";
 
 function App() {

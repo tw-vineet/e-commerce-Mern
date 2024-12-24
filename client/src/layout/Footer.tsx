@@ -6,10 +6,11 @@ import FacebookIcon from "@mui/icons-material/Facebook"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
-import Input from "../component/Input"
+
 import { footerData } from "../utils/Footertextdata"
 // @ts-ignore
 import Qrimagefooter from "../image/Frame 719.png"
+import { Input } from "../component"
 
 
 const FooterBox = styled(Box)(({ theme }) => ({
@@ -49,7 +50,7 @@ const FooterSrchIcon = styled(SendIcon)(({ theme }) => ({
 }))
 
 
-export default function Footer() {
+export function Footer() {
 
 
   return (
