@@ -15,14 +15,6 @@ export const CardBox = styled(Card)({
   height: "324px",
 });
 
-export const DashboardTable = styled(DataGrid)({
-  border:"0 !important"
-})
 
-export const DashboarBox = styled(Box)({
-  padding:"20px",
-  gap:"{2}",
-  display:"flex",
-  flexDirection:"column",
-  width:"95%"
-})
+
+
