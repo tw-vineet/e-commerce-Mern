@@ -4,6 +4,9 @@ import "./index.css";
 import App from "./App";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,6 +15,9 @@ const root = ReactDOM.createRoot(
 const theme = createTheme({
   palette: {
     primary: {
+      main: "#FFF6F4",
+    },
+    secondary: {
       main: "#1E2753",
     },
   },
@@ -19,6 +25,10 @@ const theme = createTheme({
 
 root.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </ThemeProvider>
 );
