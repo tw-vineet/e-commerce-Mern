@@ -1,4 +1,6 @@
 export * from "./dashboard"
+export * from "./login"
+export * from "./register"
 export * from "./orders"
 export * from "./products"
 export * from "./category"
