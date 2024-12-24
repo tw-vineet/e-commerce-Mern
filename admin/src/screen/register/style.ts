@@ -29,6 +29,15 @@ export const InputStyle = styled(Input)({
   border: "1px solid #D9E1EC",
   backgroundColor: "#FFFFFF",
   padding: "10px",
+  "&.css-1cmet5c-MuiInputBase-root-MuiInput-root::after ":{
+    borderBottom:"none"
+  },
+  "&.css-1cmet5c-MuiInputBase-root-MuiInput-root::before ":{
+    borderBottom:"none"
+  },
+  "&.css-1cmet5c-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before":{
+    borderBottom:"none"
+  }
 });
 
 export const FormBox = styled(Box)({

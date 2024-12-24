@@ -11,7 +11,24 @@ import {
 } from "./style";
 import Facebook from "../../asset/images/login/Facebook.png";
 import Google from "../../asset/images/login/Google.png";
+import React from "react";
 export const Login = () => {
+
+  const checkEmailValidation : React.HTML  = (input : string) =>{
+    const emailRegex = /^[a-z]+[a-z0-9._-]{0,20}@[a-z]{4,12}\.[a-z]{2,4}$/;
+    if(emailRegex.test(input)){
+
+    }
+  }
+
+  const checkPasswordValidation=(input : string) =>{
+    const passwordRegex =
+    /^(?=[a-zA-Z0-9#@$?]{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).*/;;
+    if(passwordRegex.test(input)){
+
+    }
+  }
+
   return (
     <LoginBoxArea>
       <LoginBox>
@@ -35,14 +52,14 @@ export const Login = () => {
             <LabelText>
               Email
             </LabelText>
-            <InputStyle placeholder="Enter Email Address" />
+            <InputStyle placeholder="Enter Email Address" onChange={checkEmailValidation}/>
           </Box>
 
           <Box>
             <LabelText>
               Password
             </LabelText>
-            <InputStyle placeholder="Create Password" />
+            <InputStyle placeholder="Create Password"  />
           </Box>
         
           <Box display="flex"  alignItems="center" width="430px">

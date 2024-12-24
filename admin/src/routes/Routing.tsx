@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Category, Customers, Dashboard, Inbox, Orders, Products, Reports } from '../screen'
+import { Category, Customers, Dashboard, Inbox, Login, Orders, Products, Register, Reports } from '../screen'
 
 export function Routing() {
   return (
@@ -13,6 +13,8 @@ export function Routing() {
         <Route path='/inbox' element={<Inbox/>}/>
         <Route path='/reports' element={<Reports/>}/>
         <Route path='/customers' element={<Customers/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
     </Routes>
     </>
   )
