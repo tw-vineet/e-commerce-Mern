@@ -1,14 +1,15 @@
 import React from "react";
 import { Box, Grid2, Typography, Link } from "@mui/material"
 import styled from "styled-components"
-import Navbar from "../Layout/Navbar"
-import Input from "../component/Input"
-import Buttons from "../component/button"
-import Footer from "../Layout/Footer"
+
+import { NavLink } from "react-router-dom";
+import { Buttons, Input } from "../component";
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 import { IButtonStyle } from "../Dto/dataType";
 // @ts-ignore
 import LoginImage from "../image/login.png"
-import { NavLink } from "react-router-dom";
+
 
 
 

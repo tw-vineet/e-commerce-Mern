@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Signup from "../Layout/Signup";
-import Home from "../screen/Home";
-import Login from "../Layout/Login";
-import Pagenotfound from "../screen/pagenotfound";
-import Cart from "../screen/Cart";
+import Signup from "../layout/Signup";
+import { Billing, Cart, Home, Pagenotfound } from "../screen";
+import { Login } from "../layout/Login";
+
+
 
 
 
@@ -16,6 +16,7 @@ export function Routing() {
             <Route path="/Signup" element={<Signup />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Cart" element={<Cart />} />
+            <Route path="/Billing" element={<Billing />} />
 
 
         </Routes >

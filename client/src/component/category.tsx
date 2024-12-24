@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, SvgIconTypeMap, Typography } from "@mui/material";
+import { OverridableComponent } from "@mui/types";
 
 
 
@@ -7,12 +8,18 @@ import { Box, Typography } from "@mui/material";
 
 
 interface props {
-    categoryData: any
+    categoryData: {
+        icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+            muiName: string,
+        }
+        name: string,
+        id: number
+    }
 }
 
 
 
-export default function Category({ categoryData }: props) {
+export function Category({ categoryData }: props) {
 
 
     return <>

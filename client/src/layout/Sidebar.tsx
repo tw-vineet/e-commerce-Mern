@@ -1,10 +1,10 @@
-import { Key } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
 import React from "react";
+import { Box, Typography } from "@mui/material";
 
 
-export default function Sidebar() {
-    const category: string[] = ["Women' Fashion", "Men's Fashion ", "Electronics", "Home % Lifestyle", "Medicine", "sports & Outdoor", "Baby's & Toys", "Groceries & Pets", "Helth & Beauty"]
+
+export function Sidebar() {
+    const category: string[] = ["Women' Fashion", "Men's Fashion ", "Electronics", "Home & Lifestyle", "Medicine", "sports & Outdoor", "Baby's & Toys", "Groceries & Pets", "Helth & Beauty"]
 
 
 

@@ -8,8 +8,9 @@ import AOS from "aos"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import SearchIcon from "@mui/icons-material/Search"
-import Input from "../component/Input"
+
 import { NavLink } from "react-router-dom"
+import { Input } from "../component"
 
 
 // Styling the Navbar text
@@ -65,8 +66,13 @@ const WishlistIcon = styled(FavoriteIcon)({
   marginRight: 2
 
 })
+const Navitgaion = styled(NavLink)((theme) => ({
+  fontFamily: "Poppins",
+  color: "black",
+  textDecoration: "none"
+}))
 
-export default function Navbar() {
+export function Navbar() {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -98,25 +104,25 @@ export default function Navbar() {
 
             <Bartext size={6}>
               <Box>
-                <Navbartext></Navbartext>
-                <NavLink to={"/"} >
+
+                <Navitgaion to={"/"} >
                   Home
-                </NavLink>
+                </Navitgaion>
               </Box>
               <Box>
-                <Link href="#" underline="hover">
+                <Navitgaion to="/">
                   Contact
-                </Link>
+                </Navitgaion>
               </Box>
               <Box>
-                <Link >
+                <Navitgaion to="/" >
                   About
-                </Link>
+                </Navitgaion>
               </Box>
               <Box>
-                <NavLink to={"/Signup"}  >
+                <Navitgaion to={"/Signup"}  >
                   Sign Up
-                </NavLink>
+                </Navitgaion>
               </Box>
             </Bartext>
 

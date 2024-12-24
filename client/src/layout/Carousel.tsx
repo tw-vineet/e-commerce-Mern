@@ -35,7 +35,7 @@ const ArrowIconCarousel = styled(ArrowForwardIcon)({
 })
 
 
-export default function Carouselbar() {
+export function Carouselbar() {
 
 
 

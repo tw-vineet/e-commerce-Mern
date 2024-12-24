@@ -1,17 +1,18 @@
 import React from "react";
-import Navbar from "../Layout/Navbar";
 import styled from "styled-components";
-import { Button, Container, Divider, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import { GridRenderCellParams } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+
+import { Footer, Navbar } from "../layout";
+import { NavLink } from "react-router-dom";
+import { Buttons, Input } from "../component";
+
+
 import prodImg from "../image/71ghAT0kkNL._AC_UY327_FMwebp_QL65_.jpg";
-import Buttons from "../component/button";
-import Input from "../component/Input";
-import { Padding } from "@mui/icons-material";
-import Footer from "../Layout/Footer";
+
 
 const IncIconProduct = styled(ExpandLessIcon)({
   fontSize: "15px !important",
@@ -55,7 +56,7 @@ const buttonStyleCoupan = {
 }
 
 
-export default function Cart() {
+export function Cart() {
 
 
 
@@ -104,10 +105,10 @@ export default function Cart() {
                 flexDirection={"column"}
                 marginLeft={2}
               >
-                <Incrementbtn onClick={(e) => fun(e, param)} name="btn1">
+                <Incrementbtn onClick={(e) => productCartNum(e, param)} name="btn1">
                   <IncIconProduct name="iconIncrement" />
                 </Incrementbtn>
-                <Incrementbtn onClick={(e) => fun(e, param)} name="btn2">
+                <Incrementbtn onClick={(e) => productCartNum(e, param)} name="btn2">
                   <DecIconProduct />
                 </Incrementbtn>
               </Box>
@@ -154,12 +155,13 @@ export default function Cart() {
     },
   ];
 
-  function fun(
+
+
+
+  function productCartNum(
     e: React.MouseEvent<HTMLButtonElement>,
     param: GridRenderCellParams
   ) {
-    console.log(param);
-
     if (e.currentTarget.name === "btn1") {
       param.row.productQuantity += 1;
       param.row.productSubtotal =
@@ -208,7 +210,7 @@ export default function Cart() {
         <Box marginTop={2} display={"flex"} justifyContent={"space-between"} marginBottom={25}>
           <Box>
             <Input label="Coupon Code " variant="outlined" name="couponCode" type="button" styleProps={{ width: 300, borderRadius: 0 }} />
-            <Buttons text="Apply Coupan" variant1="contained" styleProps={{ ...buttonStyleCoupan }} />
+            <Buttons text="Apply Coupon" variant1="contained" styleProps={{ ...buttonStyleCoupan }} />
           </Box>
           <Box border={1} width={400} padding={3}>
             <Typography variant="h6">Card Total</Typography>
@@ -225,7 +227,7 @@ export default function Cart() {
               <Typography variant="subtitle1">34444</Typography>
             </Box>
             <Box display={"flex"} justifyContent={"center"} marginTop={2}>
-              <Buttons text="Procees to Checkout" variant1="contained" styleProps={{ ...buttonStyleCoupan }} />
+              <NavLink to={"/Billing"}>      <Buttons text="Procees to Checkout" variant1="contained" styleProps={{ ...buttonStyleCoupan }} /></NavLink>
             </Box >
 
           </Box>
