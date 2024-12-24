@@ -1,6 +1,6 @@
 import { Header, SideBar } from "./layout";
-import { Box,} from "@mui/material";
-import { Dashboard } from "./screen";
+import { Box } from "@mui/material";
+import { Routing } from "./routes/Routing";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Box display="flex">
         <SideBar />
         <Box width="100%" height="100vh" overflow="auto">
-          <Dashboard />
+          <Routing />
         </Box>
       </Box>
     </>

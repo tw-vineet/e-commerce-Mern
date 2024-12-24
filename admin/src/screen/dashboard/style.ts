@@ -1,7 +1,15 @@
 import { Box, Grid2 } from "@mui/material";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { DataGrid } from "@mui/x-data-grid";
 
+export const DashboarBox = styled(Box)({
+  padding: "20px",
+  display: "flex",
+  gap: "20px",
+  flexDirection: "column",
+  width: "95%",
+});
 export const CardBox = styled(Box)(({ theme }) => ({
   height: "70px",
   width: "208px",
@@ -93,3 +101,7 @@ export const TableBox = styled(Box)(( {theme})=>({
   flexDirection:"column",
   gap:10
 }))
+
+export const DashboardTable = styled(DataGrid)({
+  border: "0 !important",
+});
