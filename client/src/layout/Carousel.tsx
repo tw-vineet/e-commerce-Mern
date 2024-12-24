@@ -8,7 +8,11 @@ import { carouselData } from "../utils/carousel"
 
 
 
-
+function Item({ item }: { item: { description: string } }) {
+    return (
+        <div style={{ width: "100%", height: "100%" }}>{item.description}</div>
+    );
+}
 
 const BtnCarousel = styled(Box)({
     width: "20px",
@@ -30,9 +34,6 @@ const ArrowIconCarousel = styled(ArrowForwardIcon)({
     marginLeft: 2
 })
 
-const SliderCarousel = styled(Carousel)({
-    height: "100%"
-})
 
 export function Carouselbar() {
 
@@ -46,18 +47,17 @@ export function Carouselbar() {
         console.log(cur, prev);
     };
 
-
     return (
         <div>
-            <SliderCarousel
-                index={index}
+            <Carousel
+                key={index}
                 interval={3000}
                 animation="slide"
                 indicators={false}
                 stopAutoPlayOnHover
                 swipe
                 className="my-carousel"
-
+                sx={{ height: "100%" }}
             >
                 {carouselData.map((item, i) => {
                     return <>
@@ -85,7 +85,7 @@ export function Carouselbar() {
                     </>
                 })}
 
-            </SliderCarousel>
+            </Carousel>
             <Box display={"flex"} justifyContent={"center"} position={"relative"} bottom={"27px"} zIndex={1}>
                 {
                     carouselData.map((item, i) => (

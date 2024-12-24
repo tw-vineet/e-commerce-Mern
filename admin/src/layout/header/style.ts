@@ -23,5 +23,5 @@ export const ProfileBox = styled(Box)({
 });
 
 export const AvatarBox = styled(Avatar)({
-   backgroundColor: "#1FD286"
+   backgroundColor: "#1FD286 !important"
 })
