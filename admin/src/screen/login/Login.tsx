@@ -14,7 +14,7 @@ import Google from "../../asset/images/login/Google.png";
 import React from "react";
 export const Login = () => {
 
-  const checkEmailValidation : React.HTML  = (input : string) =>{
+  const checkEmailValidation = (input : string) =>{
     const emailRegex = /^[a-z]+[a-z0-9._-]{0,20}@[a-z]{4,12}\.[a-z]{2,4}$/;
     if(emailRegex.test(input)){
 
@@ -52,7 +52,7 @@ export const Login = () => {
             <LabelText>
               Email
             </LabelText>
-            <InputStyle placeholder="Enter Email Address" onChange={checkEmailValidation}/>
+            <InputStyle placeholder="Enter Email Address" />
           </Box>
 
           <Box>
