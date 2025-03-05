@@ -6,10 +6,12 @@ dotenv.config();
 
 export const getEncryptedPassword = async (password: string, next: NextFunction) => {
     try {
+
         if (process.env.PASSWORD_SECRET_KEY) {
             const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.PASSWORD_SECRET_KEY).toString();
             return encryptedPassword;
         }
+        throw new Error("Password secret key is not available")
     } catch (error) {
         next(error)
     }

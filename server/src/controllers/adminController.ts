@@ -6,17 +6,20 @@ import User from "../models/Users.js";
 import { UploadedImage } from "../DataTypes/dataTypes.js";
 import { uploadImageToCloudinary } from "../helper/utils/imageUpload.js";
 import { ValidationError } from "../middleware/errorHandler.js";
+import { getObjectIds } from "../helper/utils/HelperFunctions.js";
+import Product from "../models/Products.js";
 
-const { CATEGORY_ADDED, CATEGORY_LIST, USER_DETAILS, USER_DELETED, ALREADY_EXIST } = messages;
+const { CATEGORY_ADDED, CATEGORY_LIST, USER_DETAILS, USER_DELETED, ALREADY_EXIST, USER_LIST, PRODUCT_DELETED } = messages;
 
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { userIds }: { userIds: string[] } = req.body
-        const objectIds = userIds.map((id: string) => new mongoose.Types.ObjectId(id));
+        const { userIds }: { userIds: string | string[] } = req.body;
+        const idArray = Array.isArray(userIds) ? userIds : [userIds];
+        const objectIds = getObjectIds(idArray);
 
         await User.updateMany(
             { _id: { $in: objectIds } },
-            { $set: { isDeleted: false } }
+            { $set: { isDeleted: true } }
         );
 
         res.status(200).json({
@@ -32,12 +35,12 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const userList = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const allUserList = await User.find({ isAdmin: false });
+        const allUserList = await User.find({ isAdmin: false }).sort({ createdAt: -1 });
         res.status(200).json({
             status: true,
             statusCode: 200,
             data: allUserList,
-            message: USER_DETAILS,
+            message: USER_LIST,
         });
         return;
     } catch (error) {
@@ -45,7 +48,6 @@ const userList = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 const addCategory = async (req: Request, res: Response, next: NextFunction) => {
-    let cloudnaryResult: UploadedImage[] = []
     try {
         const payLoad = {
             ...req.body,
@@ -71,12 +73,6 @@ const addCategory = async (req: Request, res: Response, next: NextFunction) => {
         }
         // ========================================================
 
-        if (imageFile) {
-            const result = await uploadImageToCloudinary(imageFile, next);
-            cloudnaryResult = result || []                  //In case if it returns undefined
-            payLoad.categoryIcon = cloudnaryResult[0]?.secure_url || ""
-        };
-
         const newCategory = new Category(payLoad);
         const addedCategory = await newCategory.save();
         res.status(201).json({
@@ -90,24 +86,31 @@ const addCategory = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const categoryList = async (req: Request, res: Response, next: NextFunction) => {
+const deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const categoryList = await Category.find();
+        const { productIds }: { productIds: string | string[] } = req.body;
+        const idArray = Array.isArray(productIds) ? productIds : [productIds];
+        const objectIds = getObjectIds(idArray);
+
+        await Product.updateMany(
+            { _id: { $in: objectIds } },
+            { $set: { isDeleted: true } }
+        );
+
         res.status(200).json({
             status: true,
             statusCode: 200,
-            data: categoryList,
-            message: CATEGORY_LIST,
+            message: PRODUCT_DELETED,
         });
+
     } catch (error) {
         next(error)
     }
-};
-
+}
 
 export const adminController = {
     deleteUser,
     userList,
     addCategory,
-    categoryList
+    deleteProduct
 }

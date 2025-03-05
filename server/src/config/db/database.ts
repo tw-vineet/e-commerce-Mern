@@ -6,14 +6,12 @@ import { messages } from "../../helper/utils/messages.js";
 dotenv.config();
 const { DATABASE_CONNECTED, DATABASE_CONNECTION_ERROR } = messages;
 const MONGO_URI: string = process.env.MONGO_URI || "localhost";
-
 const connectDB = async () => {
     try {
         await mongoose.connect(MONGO_URI, {
             autoIndex: true
         });
         logger.info(DATABASE_CONNECTED);
-
     } catch (error) {
         logger.error(DATABASE_CONNECTION_ERROR, error);
         throw new Error(DATABASE_CONNECTION_ERROR);

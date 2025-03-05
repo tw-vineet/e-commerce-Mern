@@ -66,3 +66,13 @@ export interface CategoryDuplicateErrors {
     categoryCode?: string;
     categoryName?: string;
 }
+
+export interface UploadedFile {
+    fieldname: string;
+    originalname: string;
+    encoding: string;
+    mimetype: string;
+    path: string;
+    size: number;
+    filename: string;
+}

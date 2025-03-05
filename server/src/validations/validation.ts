@@ -112,10 +112,10 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
                 otherwise: joi.optional()
             }),
             address: joi.string().required().label("Address"),
-            profileImage: joi.alternatives().try(
+            profileImage: joi.alternatives().label('Profile image').try(
                 joi.any().required().label('Profile image').custom((value, helpers) => {
                     if (!value) {
-                        return helpers.error('any.required', { message: `{{#label}} ${IS_REQUIRED}` });
+                        return helpers.error('any.required', { message: `Profile image ${IS_REQUIRED}` });
                     } else if (typeof value !== 'string') {
                         if (Array.isArray(value)) {
                             return helpers.error('any.invalid', { message: ONE_IMAGE_ALLOWED });
@@ -133,8 +133,8 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
                         })
                     }
                 }),
-
             ).required().messages({
+                "any.required": `{{#label}} ${messages.IS_REQUIRED}`,
                 'any.empty': `{{#label}} ${messages.IS_REQUIRED}`,
                 'string.empty': `{{#label}} ${messages.IS_REQUIRED}`,
                 'any.invalid': `{{#message}}`,
@@ -144,10 +144,13 @@ export const updateUserValidation = async (req: Request, res: Response, next: Ne
             'string.empty': `{{#label}} ${messages.IS_REQUIRED}`,
         });
 
+
+
         const validatingData: dynamicObject = {
             ...req.body,
             profileImage: req.files?.profileImage
         };
+        console.log("validatingData", validatingData);
 
         const errors = validateFormData(validatingData, validationSchema);
 
@@ -208,5 +211,42 @@ export const categoryValidation = async (req: Request, res: Response, next: Next
         next();
     } catch (error) {
         next(error);
+    }
+}
+
+export const productValidation = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const validationSchema: joi.ObjectSchema = joi.object({
+            name: joi.string().required().label("Name"),
+            price: joi.number().required().label("Price"),
+            discountPrice: joi.string().required().label("Discount price"),
+            description: joi.string().required().label("Description"),
+            categories: joi.alternatives()
+                .try(joi.array().items(joi.string()), joi.string())
+                .required()
+                .label("Categories"),
+            tags: joi.alternatives()
+                .try(joi.array().items(joi.string()), joi.string())
+                .required()
+                .label("Tags"),
+            isDigital: joi.boolean().label("IsDigital"),
+        }).options({ abortEarly: false, allowUnknown: true }).messages({
+            'string.empty': `{{#label}} ${messages.IS_REQUIRED}`,
+            'number.empty': `{{#label}} ${messages.IS_REQUIRED}`,
+        });
+
+        const validatingData: dynamicObject = {
+            ...req.body,
+            // images: req.files?.profileImage
+        };
+
+        const errors = validateFormData(validatingData, validationSchema);
+
+        if (errors) {
+            return next(new ValidationError(errors))
+        }
+        next();
+    } catch (error) {
+        next(error)
     }
 }

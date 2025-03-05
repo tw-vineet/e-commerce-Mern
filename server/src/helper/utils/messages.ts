@@ -4,6 +4,7 @@ export const messages: arrayObject = {
     USER_REGISTERED: "User registered successfully",
     USER_NOT_FOUND: "User not found",
     INCORRECT_PASSWORD: "Incorrect password",
+    INCORRECT_CURRENT_PASSWORD: "Incorrect current password",
     LOGIN_SUCCESS: "You have been loggedin successfully",
     USER_DETAILS: "User details",
     USER_DETAIL_UPDATED: "User details updated successfully",
@@ -32,6 +33,15 @@ export const messages: arrayObject = {
     DATABASE_CONNECTION_ERROR: "Database connection error",
     USER_WITH_EMAIL_EXIST: "User with this email is already exist",
     IS_ALREADY_TAKEN_FOR: "is already taken for",
-    ALREADY_EXIST: "already exist"
+    ALREADY_EXIST: "already exist",
+    PRODUCT_ADDED: "Product added successfully",
+    PRODUCT_LIST: "Product list",
+    COUNTRY_LIST: "Country list",
+    STATE_LIST: "State list",
+    CITY_LIST: "City list",
+    USER_LIST: "User list",
+    PRODUCT_DETAILS: "Product details",
+    PRODUCT_NOT_FOUND: "Product not found",
+    PRODUCT_DELETED: "Product deleted successfully"
 }
 

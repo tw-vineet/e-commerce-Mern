@@ -10,7 +10,7 @@ export const generateJwtToken = async (credential: jwtCredential, next: NextFunc
                 credential,
                 process.env.JWT_TOKEN_SECRET_KEY,
                 {
-                    expiresIn: '3d'
+                    expiresIn: '10d'
                 }
             );
             return accessToken;
