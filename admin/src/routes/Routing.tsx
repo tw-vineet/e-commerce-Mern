@@ -1,21 +1,71 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { Category, Customers, Dashboard, Inbox, Orders, Products, Reports } from '../screen'
+import React, { Suspense } from "react";
+import MainComponent from "../screen/MainComponent";
 
-export function Routing() {
-  return (
-    <>
-    <Routes>
-        <Route path='/' element={<Dashboard/>}/>
-        <Route path='/orders' element={<Orders/>}/>
-        <Route path='/products' element={<Products/>}/>
-        <Route path='/category' element={<Category/>}/>
-        <Route path='/inbox' element={<Inbox/>}/>
-        <Route path='/reports' element={<Reports/>}/>
-        <Route path='/customers' element={<Customers/>}/>
-    </Routes>
-    </>
-  )
-}
+const Category = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Category }))
+);
+const Customers = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Customers }))
+);
+const Dashboard = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Dashboard }))
+);
+const Inbox = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Inbox }))
+);
+const Orders = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Orders }))
+);
+const Products = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Products }))
+);
+const Reports = React.lazy(() =>
+  import("../screen").then((module) => ({ default: module.Reports }))
+);
 
- 
+export const routeArray = [
+  {
+    path: "/",
+    element: <MainComponent />,
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Category />
+          </Suspense>
+        ),
+      },
+      { path: "orders", element: 
+       <Suspense fallback={<div>Loading...</div>}>
+            <Orders />
+          </Suspense>
+      },
+      { path: "products", element: 
+       <Suspense fallback={<div>Loading...</div>}>
+           <Products />
+          </Suspense>
+      },
+      { path: "category", element: 
+       <Suspense fallback={<div>Loading...</div>}>
+           <Category />
+          </Suspense>
+      },
+      { path: "inbox", element: 
+       <Suspense fallback={<div>Loading...</div>}>
+           <Inbox />
+          </Suspense>
+      },
+      { path: "reports", element: 
+       <Suspense fallback={<div>Loading...</div>}>
+           <Reports />
+          </Suspense>
+      },
+      { path: "customers", element: 
+       <Suspense fallback={<div>Loading...</div>}>
+           <Customers />
+          </Suspense>
+      },
+    ],
+  },
+];

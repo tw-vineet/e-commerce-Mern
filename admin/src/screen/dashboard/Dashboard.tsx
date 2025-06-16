@@ -42,6 +42,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../redux/store";
+import def from "ajv/dist/vocabularies/applicator/additionalItems";
 
 type cardProp = {
   number: string;
